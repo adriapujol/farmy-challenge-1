@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import DataService from "simple-localstorage-data-service-stub";
 
 console.log("im here")
@@ -12,8 +12,10 @@ const SaladDesigner = (props) => {
   const [salads, setSalads] = useState([]);
 
   useEffect(() => {
-    dataService.get('products').then(response => setProducts(response))
-    // [...]
+    dataService.get('products').then(response => {
+      setProducts(response)
+    })
+    dataService.get('suppliers').then(response => setSuppliers(response))
   }, [])
 
   // Example of data file save.
@@ -25,13 +27,13 @@ const SaladDesigner = (props) => {
   const handleFileInput = (event) => {
     dataService.uploadFileInput(event).then(r => {
       event.target.value = null;
-      console.log("done!", {r})
+      console.log("done!", { r })
     })
   }
 
   return <>
     <label htmlFor="input">Form</label>
-    <input type="file" id="input" onInput={handleFileInput}/>
+    <input type="file" id="input" onInput={handleFileInput} />
   </>
 }
 
