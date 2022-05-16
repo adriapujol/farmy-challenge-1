@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import DataService from "simple-localstorage-data-service-stub";
 import Card from './components/card/Card';
 import Product from './components/product/Product';
+import NewSalad from './components/newSalad/NewSalad';
+import SaladMaker from './Pages/SaladMaker/SaladMaker';
 
 
 const dataService = DataService();
@@ -19,6 +21,7 @@ function App() {
 
   return (
     <div className="App">
+      <SaladMaker products={products} currentSalad={salads[0]} ></SaladMaker>
       {/* {
         salads.map(({ id, name, size, ingredients, cost, targetStock, currentStock, price }, index) => {
 
@@ -36,13 +39,14 @@ function App() {
 
         })
       } */}
-      {
+
+      {/* {
         products.map((product, index) => {
           return <Product
             name={product.name}
           />
         })
-      }
+      } */}
     </div>
   )
 }

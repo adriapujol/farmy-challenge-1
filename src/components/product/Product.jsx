@@ -1,11 +1,19 @@
 import React from 'react';
 import ProductStyled from './Product.styled';
 
-function Product({ name }) {
+function Product({ product, setIngredients }) {
+
+
+    const handleAddIngredient = () => {
+        setIngredients(prevIngredients => {
+            return [...prevIngredients, { id: product.id, numOfServings: 1 }];
+        })
+    }
+
     return (
         <ProductStyled>
-            <label>{name}</label>
-            <button> + </button>
+            <label>{product.name}</label>
+            <button onClick={handleAddIngredient}> + </button>
         </ProductStyled>
     )
 }
