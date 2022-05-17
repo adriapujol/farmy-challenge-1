@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import DataService from "simple-localstorage-data-service-stub";
-import Card from './components/card/Card';
-import Product from './components/product/Product';
+import SaladMaker from './Pages/SaladMaker/SaladMaker';
+import { useDispatch } from 'react-redux';
+import { productList } from './features/products/products';
+import { saladsList } from './features/salads/salads';
+import { logic } from './features/logic/logic';
 
 
 const dataService = DataService();
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [businessLogic, setBusinessLogic] = useState(null);
-  const [salads, setSalads] = useState([]);
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
-    dataService.get("businessLogic").then(response => setBusinessLogic(response));
-    dataService.get('products').then(response => setProducts(response));
-    dataService.get('salads').then(response => setSalads(response));
+
+    dataService.get('products').then(response => dispatch(productList(response)));
+    dataService.get('salads').then(response => dispatch(saladsList(response)));
+    dataService.get("businessLogic").then(response => dispatch(logic(response)));
+
   }, [])
+
 
   return (
     <div className="App">
+      <SaladMaker></SaladMaker>
       {/* {
         salads.map(({ id, name, size, ingredients, cost, targetStock, currentStock, price }, index) => {
 
@@ -36,13 +42,14 @@ function App() {
 
         })
       } */}
-      {
+
+      {/* {
         products.map((product, index) => {
           return <Product
             name={product.name}
           />
         })
-      }
+      } */}
     </div>
   )
 }
