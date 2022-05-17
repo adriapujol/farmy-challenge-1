@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '../../components/styles/Grid';
 import Product from '../../components/product/Product';
+import { useSelector } from 'react-redux';
 
-function SaladMaker({ products, currentSalad }) {
+function SaladMaker() {
     const [saladId, setSaladId] = useState(null);
     const [name, setName] = useState("");
     const [size, setSize] = useState("");
@@ -12,6 +13,12 @@ function SaladMaker({ products, currentSalad }) {
     const [price, setPrice] = useState(0);
     const [editName, setEditName] = useState(false);
     const [productList, setProductList] = useState([])
+
+
+    const products = useSelector((state) => state.products.value);
+    const salads = useSelector((state) => state.salads.value);
+    const currentSalad = useSelector(state => state.salads.value[0])
+
 
     useEffect(() => {
         if (currentSalad) {
@@ -24,11 +31,20 @@ function SaladMaker({ products, currentSalad }) {
             setPrice(currentSalad.price);
         }
     }, [currentSalad]);
-    useEffect(() => {
-        if (products) {
-            setProductList([...products]);
-        }
-    }, [products]);
+
+    // useEffect(() => {
+    //     if (products) {
+    //         setProductList([...products]);
+    //     }
+    // }, [products]);
+
+    // useEffect(() => {
+    //     console.log(prods);
+    // }, [prods])
+
+    // useEffect(() => {
+    //     console.log(salads);
+    // }, [salads])
 
 
     const handleNameInput = (e) => {
@@ -44,7 +60,7 @@ function SaladMaker({ products, currentSalad }) {
         <Grid>
             <div className="sidebar">
                 {
-                    productList.map((product, index) => {
+                    products.map((product, index) => {
                         return <Product
                             key={index}
                             product={product}
