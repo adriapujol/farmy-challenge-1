@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Grid from '../../components/styles/Grid';
 import Product from '../../components/product/Product';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { currentSalad } from '../../features/currentSalad/currentSalad';
+import { useNavigate } from 'react-router-dom';
 
 function SaladMaker() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [saladId, setSaladId] = useState(null);
     const [name, setName] = useState("Salad Name");
     const [size, setSize] = useState("");
@@ -18,7 +23,7 @@ function SaladMaker() {
 
     const products = useSelector((state) => state.products.value);
     const salads = useSelector((state) => state.salads.value);
-    const currentSalad = useSelector(state => state.currentSalad.value);
+    const currSalad = useSelector(state => state.currentSalad.value);
     const margin = useSelector(state => state.logic.value.margin);
     const saladTypes = useSelector(state => state.logic.value.saladTypes);
 
@@ -29,7 +34,7 @@ function SaladMaker() {
         return true;
     }
 
-    console.log("currentSalad", currentSalad);
+    console.log("currentSalad", currSalad);
     console.log(saladTypes);
 
     const getTargetCost = () => {
@@ -40,17 +45,26 @@ function SaladMaker() {
     }
 
     useEffect(() => {
-        if (!isEmptyObj(currentSalad)) {
-            console.log("existing salad")
-            setSaladId(currentSalad.id);
-            setName(currentSalad.name);
-            setSize(currentSalad.size);
-            setIngredients([...currentSalad.ingredients]);
-            setCost(currentSalad.cost);
-            setPrice(currentSalad.price);
+        if (!isEmptyObj(currSalad)) {
+            setSaladId(currSalad.id);
+            setName(currSalad.name);
+            setSize(currSalad.size);
+            setIngredients([...currSalad.ingredients]);
+            setCost(currSalad.cost);
+            setPrice(currSalad.price);
         }
     }, []);
 
+    useEffect(() => {
+        if (isEmptyObj(currSalad)) {
+            setSaladId(null);
+            setName("Salad Name");
+            setSize("");
+            setIngredients([]);
+            setCost(0);
+            setPrice(0);
+        }
+    }, [currSalad]);
 
     const handleNameInput = (e) => {
         setName(e.target.value);
@@ -58,6 +72,12 @@ function SaladMaker() {
 
     const handleAddIngredient = () => {
 
+    }
+
+
+    const handleCancel = () => {
+        dispatch(currentSalad({}));
+        navigate("/");
     }
 
 
@@ -96,7 +116,7 @@ function SaladMaker() {
                     }
                 </div>
                 <div className="controls">
-                    <button className="cancel">Cancel</button>
+                    <button className="cancel" onClick={handleCancel}>Cancel</button>
                     <button className="save" onClick={getTargetCost}>Save</button>
                 </div>
             </div>
