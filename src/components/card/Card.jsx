@@ -1,7 +1,20 @@
 import React from 'react'
 import CardStyle from './Card.styled';
+import { useDispatch } from 'react-redux';
+import { currentSalad } from '../../features/currentSalad/currentSalad';
+import { useNavigate } from 'react-router-dom';
 
-function Card({ id, name, size, ingredients, cost, targetStock, currentStock, price }) {
+
+function Card({ salad }) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { id, name, size, ingredients, cost, targetStock, currentStock, price } = salad;
+
+    const handleEdit = () => {
+        dispatch(currentSalad(salad))
+        navigate("/create");
+    }
 
     return (
         <CardStyle>
@@ -18,6 +31,7 @@ function Card({ id, name, size, ingredients, cost, targetStock, currentStock, pr
             <p>{targetStock}</p>
             <p>{currentStock}</p>
             <p>{price}</p>
+            <button onClick={handleEdit}>Edit</button>
         </CardStyle>
     )
 }

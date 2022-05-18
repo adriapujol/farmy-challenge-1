@@ -1,27 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Grid from '../../components/styles/Grid';
 import Product from '../../components/product/Product';
 import { useSelector } from 'react-redux';
 
 function SaladMaker() {
     const [saladId, setSaladId] = useState(null);
-    const [name, setName] = useState("");
+    const [name, setName] = useState("Salad Name");
     const [size, setSize] = useState("");
     const [ingredients, setIngredients] = useState([]);
     const [cost, setCost] = useState(0);
     const [hoursFresh, setHoursFresh] = useState(0);
     const [price, setPrice] = useState(0);
     const [editName, setEditName] = useState(false);
-    const [productList, setProductList] = useState([])
+    const [productList, setProductList] = useState([]);
+    const [currentTargetCost, setCurrentTargetCost] = useState(0);
 
 
     const products = useSelector((state) => state.products.value);
     const salads = useSelector((state) => state.salads.value);
-    const currentSalad = useSelector(state => state.salads.value[0])
+    const currentSalad = useSelector(state => state.currentSalad.value);
+    const margin = useSelector(state => state.logic.value.margin);
+    const saladTypes = useSelector(state => state.logic.value.saladTypes);
 
+    const isEmptyObj = obj => {
+        for (const property in obj) {
+            return false;
+        }
+        return true;
+    }
+
+    console.log("currentSalad", currentSalad);
+    console.log(saladTypes);
+
+    const getTargetCost = () => {
+        if (size === "large") {
+            console.log("this is large");
+            console.log(saladTypes.large);
+        }
+    }
 
     useEffect(() => {
-        if (currentSalad) {
+        if (!isEmptyObj(currentSalad)) {
             console.log("existing salad")
             setSaladId(currentSalad.id);
             setName(currentSalad.name);
@@ -30,21 +49,7 @@ function SaladMaker() {
             setCost(currentSalad.cost);
             setPrice(currentSalad.price);
         }
-    }, [currentSalad]);
-
-    // useEffect(() => {
-    //     if (products) {
-    //         setProductList([...products]);
-    //     }
-    // }, [products]);
-
-    // useEffect(() => {
-    //     console.log(prods);
-    // }, [prods])
-
-    // useEffect(() => {
-    //     console.log(salads);
-    // }, [salads])
+    }, []);
 
 
     const handleNameInput = (e) => {
@@ -92,7 +97,7 @@ function SaladMaker() {
                 </div>
                 <div className="controls">
                     <button className="cancel">Cancel</button>
-                    <button className="save">Save</button>
+                    <button className="save" onClick={getTargetCost}>Save</button>
                 </div>
             </div>
         </Grid>

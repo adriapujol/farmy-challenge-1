@@ -11,8 +11,8 @@ const saladsSlice = createSlice({
             state.value = [...state.value, action.payload];
         },
         removeSalad: (state, action) => {
-            state.value = state.value.filter(salad => salad.id !== action.payload.id)
-        }
+            state.value = state.value.filter(salad => salad.id !== action.payload.id);
+        },
     }
 });
 
