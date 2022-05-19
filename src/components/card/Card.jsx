@@ -12,8 +12,8 @@ function Card({ salad }) {
     const { id, name, size, ingredients, cost, targetStock, currentStock, price } = salad;
 
     const handleEdit = () => {
-        dispatch(currentSalad(salad))
-        navigate("/create");
+        dispatch(currentSalad(salad));
+        navigate("/edit");
     }
 
     return (
