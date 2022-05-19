@@ -2,7 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const currentSaladSlice = createSlice({
     name: "currentSalad",
-    initialState: { value: {} },
+    initialState: {
+        value: {
+            id: "b156d2da-a1a4-4f68-b333-37b79856a9ec",
+            name: "Salad name",
+            size: "large",
+            ingredients: [],
+            cost: 0,
+            targetStock: 0,
+            currentStock: 0,
+            price: 0
+        }
+    },
     reducers: {
         currentSalad: (state, action) => {
             state.value = action.payload;
@@ -18,9 +29,17 @@ const currentSaladSlice = createSlice({
             const newState = { ...state.value, ingredients: [...updatedIngredients] }
             state.value = newState
         },
+        addIngredients: (state, action) => {
+            state.value = { ...state.value, ingredients: [...action.payload] }
+        },
+        deleteIngredients: (state, action) => {
+            const copyIngredients = [...state.value.ingredients];
+            const updatedIngredients = copyIngredients.filter(ingredient => ingredient.id !== action.payload.id);
+            state.value = { ...state.value, ingredients: [...updatedIngredients] }
+        },
     }
 });
 
-export const { currentSalad, updateServing } = currentSaladSlice.actions;
+export const { currentSalad, updateServing, addIngredients, deleteIngredients } = currentSaladSlice.actions;
 
 export default currentSaladSlice.reducer;

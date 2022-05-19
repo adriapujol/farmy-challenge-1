@@ -22,6 +22,7 @@ function SaladMaker() {
     const [editName, setEditName] = useState(false);
     const [productList, setProductList] = useState([]);
     const [currentTargetCost, setCurrentTargetCost] = useState(0);
+    const [showIng, setShowIng] = useState(false);
 
 
     const products = useSelector((state) => state.products.value);
@@ -61,25 +62,26 @@ function SaladMaker() {
 
     // To clean when going from edit to create
 
-    useEffect(() => {
-        if (isEmptyObj(currSalad)) {
-            setSaladId(null);
-            setName("Salad Name");
-            setSize("");
-            setIngredients([]);
-            setCost(0);
-            setPrice(0);
-        }
-    }, [currSalad]);
+    // useEffect(() => {
+    //     if (isEmptyObj(currSalad)) {
+    //         setSaladId(null);
+    //         setName("Salad Name");
+    //         setSize("");
+    //         setIngredients([]);
+    //         setCost(0);
+    //         setPrice(0);
+    //     }
+    // }, [currSalad]);
 
     useEffect(() => {
+        console.log("CHANGED INGREDIENTS LIST FULL")
         const tempIng = [];
-        ingredients.forEach(ingredient => {
+        currSalad.ingredients.forEach(ingredient => {
             const tempProd = products.find(prod => prod.id === ingredient.id);
             tempIng.push(tempProd);
         })
         setFullIngredients([...tempIng]);
-    }, [ingredients])
+    }, [currSalad.ingredients])
 
     const handleNameInput = (e) => {
         setName(e.target.value);
@@ -121,15 +123,12 @@ function SaladMaker() {
                 <div className="ingredients">
                     <h4>Ingredients</h4>
                     {
-                        // ingredients.map((ingredient, index) => {
-                        //     let prodName;
-                        //     products.find((product, index) => {
-                        //         if (product.id === ingredient.id) return prodName = product.name;
-                        //     })
-                        //     return <div key={index}>{prodName}</div>
-                        // })
-                        fullIngredients.map((ingredient, index) => {
-                            return <Ingredient key={index} index={index} ingredient={ingredient} setIngredients={setIngredients} ></Ingredient>
+                        (currSalad && currSalad.ingredients.length > 0) && fullIngredients.map((ingredient, index) => {
+                            return <Ingredient
+                                key={index}
+                                index={index}
+                                ingredient={ingredient}
+                            />
                         })
 
                     }
