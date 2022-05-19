@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import Grid from '../../components/styles/Grid';
-import Product from '../../components/product/Product';
 import { useSelector, useDispatch } from 'react-redux';
 import { currentSalad } from '../../features/currentSalad/currentSalad';
 import { useNavigate } from 'react-router-dom';
+import Grid from '../../components/styles/Grid';
+import Product from '../../components/product/Product';
+import Ingredient from '../../components/ingredient/Ingredient';
 
 function SaladMaker() {
     const dispatch = useDispatch();
@@ -13,7 +14,9 @@ function SaladMaker() {
     const [name, setName] = useState("Salad Name");
     const [size, setSize] = useState("");
     const [ingredients, setIngredients] = useState([]);
+    const [fullIngredients, setFullIngredients] = useState([]);
     const [cost, setCost] = useState(0);
+    const [numServings, setNumServings] = useState(1);
     const [hoursFresh, setHoursFresh] = useState(0);
     const [price, setPrice] = useState(0);
     const [editName, setEditName] = useState(false);
@@ -55,6 +58,9 @@ function SaladMaker() {
         }
     }, []);
 
+
+    // To clean when going from edit to create
+
     useEffect(() => {
         if (isEmptyObj(currSalad)) {
             setSaladId(null);
@@ -65,6 +71,15 @@ function SaladMaker() {
             setPrice(0);
         }
     }, [currSalad]);
+
+    useEffect(() => {
+        const tempIng = [];
+        ingredients.forEach(ingredient => {
+            const tempProd = products.find(prod => prod.id === ingredient.id);
+            tempIng.push(tempProd);
+        })
+        setFullIngredients([...tempIng]);
+    }, [ingredients])
 
     const handleNameInput = (e) => {
         setName(e.target.value);
@@ -106,13 +121,17 @@ function SaladMaker() {
                 <div className="ingredients">
                     <h4>Ingredients</h4>
                     {
-                        ingredients.map((ingredient, index) => {
-                            let prodName;
-                            products.find((product, index) => {
-                                if (product.id === ingredient.id) return prodName = product.name;
-                            })
-                            return <div key={index}>{prodName}</div>
+                        // ingredients.map((ingredient, index) => {
+                        //     let prodName;
+                        //     products.find((product, index) => {
+                        //         if (product.id === ingredient.id) return prodName = product.name;
+                        //     })
+                        //     return <div key={index}>{prodName}</div>
+                        // })
+                        fullIngredients.map((ingredient, index) => {
+                            return <Ingredient key={index} index={index} ingredient={ingredient} setIngredients={setIngredients} ></Ingredient>
                         })
+
                     }
                 </div>
                 <div className="controls">
