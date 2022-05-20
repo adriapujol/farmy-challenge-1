@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { currentSalad, updateServing, deleteIngredients } from '../../features/currentSalad/currentSalad';
 import { productList } from '../../features/products/products';
+import { productsOptions, removeProduct, addProduct } from "../../features/productsSelect/productsSelect";
 
 function Ingredient({ ingredient }) {
 
@@ -53,6 +54,7 @@ function Ingredient({ ingredient }) {
     const deleteIngredient = () => {
         // const currIng = currIngredientList.filter(ingredient => ingredient.id !== id);
         dispatch(deleteIngredients({ id: id }));
+        dispatch(addProduct({ ...ingredient }));
     }
 
     console.log("INGREDIENT", currIngredient);

@@ -35,11 +35,8 @@ const currentSaladSlice = createSlice({
         deleteIngredients: (state, action) => {
             const copyIngredients = [...state.value.ingredients];
             const updatedIngredients = copyIngredients.filter(ingredient => {
-                console.log("REDUCER ITERARY ID", ingredient.id);
-                console.log("REDUCER PAYLOAD ID", action.payload.id);
                 return ingredient.id !== action.payload.id
             });
-            console.log("REDUCER IGNREDIENTS", updatedIngredients);
             state.value = { ...state.value, ingredients: [...updatedIngredients] }
         },
     }

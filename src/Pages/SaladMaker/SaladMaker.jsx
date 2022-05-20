@@ -3,27 +3,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { currentSalad } from '../../features/currentSalad/currentSalad';
 import { useNavigate } from 'react-router-dom';
 import Grid from '../../components/styles/Grid';
-import Product from '../../components/product/Product';
 import Ingredient from '../../components/ingredient/Ingredient';
-import Products from '../../components/products/Products';
+import ProductsList from '../../components/products/ProductsList';
 
 function SaladMaker() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [saladId, setSaladId] = useState(null);
+
     const [name, setName] = useState("Salad Name");
     const [size, setSize] = useState("");
-    const [ingredients, setIngredients] = useState([]);
     const [fullIngredients, setFullIngredients] = useState([]);
     const [cost, setCost] = useState(0);
-    const [numServings, setNumServings] = useState(1);
-    const [hoursFresh, setHoursFresh] = useState(0);
     const [price, setPrice] = useState(0);
     const [editName, setEditName] = useState(false);
-    const [productList, setProductList] = useState([]);
-    const [currentTargetCost, setCurrentTargetCost] = useState(0);
-    const [showIng, setShowIng] = useState(false);
+
 
 
     const products = useSelector((state) => state.products.value);
@@ -39,9 +33,6 @@ function SaladMaker() {
         return true;
     }
 
-    console.log("currentSalad", currSalad);
-    console.log(saladTypes);
-
     const getTargetCost = () => {
         if (size === "large") {
             console.log("this is large");
@@ -51,10 +42,8 @@ function SaladMaker() {
 
     useEffect(() => {
         if (!isEmptyObj(currSalad)) {
-            setSaladId(currSalad.id);
             setName(currSalad.name);
             setSize(currSalad.size);
-            setIngredients([...currSalad.ingredients]);
             setCost(currSalad.cost);
             setPrice(currSalad.price);
         }
@@ -97,18 +86,7 @@ function SaladMaker() {
 
     return (
         <Grid>
-            <Products></Products>
-            {/* <div className="sidebar">
-                {
-                    products.map((product, index) => {
-                        return <Product
-                            key={index}
-                            product={product}
-                            setIngredients={setIngredients}
-                        />
-                    })
-                }
-            </div> */}
+            <ProductsList />
             <div className="content">
                 <div className="info">
                     {editName ? <input type="text" placeholder="Salad name here" value={name} onChange={handleNameInput} /> : <h3>{name}</h3>}

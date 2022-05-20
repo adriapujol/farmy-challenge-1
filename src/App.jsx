@@ -5,6 +5,7 @@ import Home from './Pages/Home/Home';
 import Navbar from './components/navbar/Navbar';
 import { useDispatch } from 'react-redux';
 import { productList } from './features/products/products';
+import { productsOptions } from './features/productsSelect/productsSelect';
 import { saladsList } from './features/salads/salads';
 import { logic } from './features/logic/logic';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -17,8 +18,10 @@ function App() {
 
 
   useEffect(() => {
-
-    dataService.get('products').then(response => dispatch(productList(response)));
+    dataService.get('products').then(response => {
+      dispatch(productList(response));
+      dispatch(productsOptions(response));
+    });
     dataService.get('salads').then(response => dispatch(saladsList(response)));
     dataService.get("businessLogic").then(response => dispatch(logic(response)));
 
