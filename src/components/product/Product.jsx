@@ -10,9 +10,13 @@ function Product({ product, setIngredients }) {
     const handleAddIngredient = () => {
         const updatedIngredients = [...currSalad.ingredients, { id: product.id, numOfServings: 1 }];
         dispatch(addIngredients(updatedIngredients));
-        setIngredients(prevIngredients => {
-            return [...prevIngredients, { id: product.id, numOfServings: 1 }];
-        })
+        // setIngredients(prevList => {
+        //     const newList = prevList.filter(item => item.id !== product.id);
+        //     return newList;
+        // })
+        // setIngredients(prevIngredients => {
+        //     return [...prevIngredients, { id: product.id, numOfServings: 1 }];
+        // })
     }
 
     return (

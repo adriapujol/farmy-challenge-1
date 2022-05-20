@@ -4,7 +4,7 @@ const currentSaladSlice = createSlice({
     name: "currentSalad",
     initialState: {
         value: {
-            id: "b156d2da-a1a4-4f68-b333-37b79856a9ec",
+            id: "",
             name: "Salad name",
             size: "large",
             ingredients: [],
@@ -34,7 +34,12 @@ const currentSaladSlice = createSlice({
         },
         deleteIngredients: (state, action) => {
             const copyIngredients = [...state.value.ingredients];
-            const updatedIngredients = copyIngredients.filter(ingredient => ingredient.id !== action.payload.id);
+            const updatedIngredients = copyIngredients.filter(ingredient => {
+                console.log("REDUCER ITERARY ID", ingredient.id);
+                console.log("REDUCER PAYLOAD ID", action.payload.id);
+                return ingredient.id !== action.payload.id
+            });
+            console.log("REDUCER IGNREDIENTS", updatedIngredients);
             state.value = { ...state.value, ingredients: [...updatedIngredients] }
         },
     }

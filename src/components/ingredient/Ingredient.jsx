@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { currentSalad, updateServing, deleteIngredients } from '../../features/currentSalad/currentSalad';
 import { productList } from '../../features/products/products';
 
-function Ingredient({ ingredient, index, setIngredients }) {
+function Ingredient({ ingredient }) {
 
     const dispatch = useDispatch();
 
@@ -56,6 +56,7 @@ function Ingredient({ ingredient, index, setIngredients }) {
     }
 
     console.log("INGREDIENT", currIngredient);
+    console.log("THIS IS THE ID", id);
 
     return (
         <div>

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Grid from '../../components/styles/Grid';
 import Product from '../../components/product/Product';
 import Ingredient from '../../components/ingredient/Ingredient';
+import Products from '../../components/products/Products';
 
 function SaladMaker() {
     const dispatch = useDispatch();
@@ -62,16 +63,11 @@ function SaladMaker() {
 
     // To clean when going from edit to create
 
-    // useEffect(() => {
-    //     if (isEmptyObj(currSalad)) {
-    //         setSaladId(null);
-    //         setName("Salad Name");
-    //         setSize("");
-    //         setIngredients([]);
-    //         setCost(0);
-    //         setPrice(0);
-    //     }
-    // }, [currSalad]);
+    useEffect(() => {
+        if (isEmptyObj(currSalad)) {
+            setName("Salad Name");
+        }
+    }, [currSalad]);
 
     useEffect(() => {
         console.log("CHANGED INGREDIENTS LIST FULL")
@@ -80,6 +76,7 @@ function SaladMaker() {
             const tempProd = products.find(prod => prod.id === ingredient.id);
             tempIng.push(tempProd);
         })
+        console.log("TEMP ING CHECK", tempIng);
         setFullIngredients([...tempIng]);
     }, [currSalad.ingredients])
 
@@ -100,7 +97,8 @@ function SaladMaker() {
 
     return (
         <Grid>
-            <div className="sidebar">
+            <Products></Products>
+            {/* <div className="sidebar">
                 {
                     products.map((product, index) => {
                         return <Product
@@ -110,7 +108,7 @@ function SaladMaker() {
                         />
                     })
                 }
-            </div>
+            </div> */}
             <div className="content">
                 <div className="info">
                     {editName ? <input type="text" placeholder="Salad name here" value={name} onChange={handleNameInput} /> : <h3>{name}</h3>}
@@ -125,8 +123,7 @@ function SaladMaker() {
                     {
                         (currSalad && currSalad.ingredients.length > 0) && fullIngredients.map((ingredient, index) => {
                             return <Ingredient
-                                key={index}
-                                index={index}
+                                key={ingredient.id}
                                 ingredient={ingredient}
                             />
                         })
