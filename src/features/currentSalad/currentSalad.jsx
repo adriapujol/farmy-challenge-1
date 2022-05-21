@@ -39,9 +39,15 @@ const currentSaladSlice = createSlice({
             });
             state.value = { ...state.value, ingredients: [...updatedIngredients] }
         },
+        updateName: (state, action) => {
+            state.value = { ...state.value, name: action.payload.name }
+        },
+        updateSize: (state, action) => {
+            state.value = { ...state.value, size: action.payload.size }
+        }
     }
 });
 
-export const { currentSalad, updateServing, addIngredients, deleteIngredients } = currentSaladSlice.actions;
+export const { currentSalad, updateServing, addIngredients, deleteIngredients, updateName, updateSize } = currentSaladSlice.actions;
 
 export default currentSaladSlice.reducer;

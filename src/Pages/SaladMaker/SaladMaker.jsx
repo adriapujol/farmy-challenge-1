@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
+// import SaladMakerStyle from './SaladMaker.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { currentSalad } from '../../features/currentSalad/currentSalad';
 import { useNavigate } from 'react-router-dom';
 import Grid from '../../components/styles/Grid';
 import Ingredient from '../../components/ingredient/Ingredient';
 import ProductsList from '../../components/products/ProductsList';
+import SaladEdit from '../../components/saladEdit/SaladEdit';
 
 function SaladMaker() {
     const dispatch = useDispatch();
@@ -87,7 +89,8 @@ function SaladMaker() {
     return (
         <Grid>
             <ProductsList />
-            <div className="content">
+            <SaladEdit></SaladEdit>
+            {/* <div className="content">
                 <div className="info">
                     {editName ? <input type="text" placeholder="Salad name here" value={name} onChange={handleNameInput} /> : <h3>{name}</h3>}
                     <button onClick={() => setEditName(prevEdit => !prevEdit)}>edit</button>
@@ -112,7 +115,7 @@ function SaladMaker() {
                     <button className="cancel" onClick={handleCancel}>Cancel</button>
                     <button className="save" onClick={getTargetCost}>Save</button>
                 </div>
-            </div>
+            </div> */}
         </Grid>
     )
 }
