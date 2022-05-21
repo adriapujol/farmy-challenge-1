@@ -12,7 +12,8 @@ import Size from '../size/Size';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { getCost, getPrice, isEmptyObj, combineById, getHoursFresh, getWeight } from '../../helpers/helpers';
-import { addSalad } from '../../features/salads/salads';
+import { addSalad, updateSalad } from '../../features/salads/salads';
+import { v4 as uuid } from 'uuid';
 
 function SaladEdit() {
     const dispatch = useDispatch();
@@ -44,6 +45,10 @@ function SaladEdit() {
         setCost(currSalad.cost);
         setPrice(currSalad.price);
     }, []);
+
+    useEffect(() => {
+        if (currSalad.id === "") dispatch(currentSalad({ ...currSalad, id: uuid() }))
+    }, [currSalad]);
 
     useEffect(() => {
         if (!isEmptyObj(saladTypes)) {
@@ -91,7 +96,7 @@ function SaladEdit() {
 
     const handleCancel = () => {
         dispatch(currentSalad({
-            id: "",
+            id: uuid(),
             name: "Salad name",
             size: "large",
             ingredients: [],
@@ -105,8 +110,22 @@ function SaladEdit() {
     }
 
     const handleAddSalad = () => {
+
+        console.log(salads);
+        const saladExist = salads.find(salad => salad.id === currSalad.id);
+        console.log("SALAD EXIST: ", saladExist);
+
+        if (currSalad.ingredients.length === 0) return alert("Remember to add ingredients");
+        if (!isEmptyObj(saladExist)) {
+            console.log("UPDATE")
+            dispatch(updateSalad(currSalad))
+        } else {
+            console.log("NEWWWW")
+            dispatch(addSalad(currSalad));
+        }
+        console.log("This fired")
         dispatch(currentSalad({
-            id: "",
+            id: uuid(),
             name: "Salad name",
             size: "large",
             ingredients: [],
@@ -115,7 +134,6 @@ function SaladEdit() {
             currentStock: 0,
             price: 0
         }));
-        dispatch(addSalad(currSalad));
         navigate("/")
     }
 
