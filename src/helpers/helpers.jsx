@@ -7,12 +7,20 @@ export const combineById = (ingredientsList, productsList) => {
     return combined;
 };
 
-export const getCost = (fullProductsList) => {
+export const getCost = fullProductsList => {
     const values = fullProductsList.map(product => product.costPerServing * product.numOfServings)
     const initalValue = 0;
     const cost = values.reduce((previousValue, currentValue) => previousValue + currentValue, initalValue);
     return cost;
 };
+
+export const getWeight = fullProductsList => {
+    const weights = fullProductsList.map(product => product.weightPerServing * product.numOfServings)
+    const initalValue = 0;
+    const cost = weights.reduce((previousValue, currentValue) => previousValue + currentValue, initalValue);
+    return cost;
+}
+
 export const getPrice = (cost, margin) => cost + cost * margin;
 
 export const getHoursFresh = fullIngredientsList => {

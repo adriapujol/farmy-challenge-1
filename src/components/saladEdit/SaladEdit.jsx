@@ -11,12 +11,13 @@ import FlexWrap from '../styles/FlexWrap';
 import Size from '../size/Size';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
-import { getCost, getPrice, isEmptyObj, combineById, getHoursFresh } from '../../helpers/helpers';
+import { getCost, getPrice, isEmptyObj, combineById, getHoursFresh, getWeight } from '../../helpers/helpers';
 
 function SaladEdit() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const standardWidth = "1000px";
 
     const [name, setName] = useState("Salad Name");
     const [size, setSize] = useState("");
@@ -24,6 +25,7 @@ function SaladEdit() {
     const [targetCost, setTargetCost] = useState(0);
     const [targetWeight, setTargetWeight] = useState(0);
     const [cost, setCost] = useState(0);
+    const [weight, setWeight] = useState(0);
     const [price, setPrice] = useState(0);
     const [editName, setEditName] = useState(false);
     const [hoursFresh, setHoursFresh] = useState(0);
@@ -59,6 +61,7 @@ function SaladEdit() {
     useEffect(() => {
         dispatch(updateCost({ cost: getCost(fullIngredients) }));
         setHoursFresh(getHoursFresh(fullIngredients));
+        setWeight(getWeight(fullIngredients));
         console.log("FULL INGREDIENTS", fullIngredients)
         console.log("GETTING HOURS", getHoursFresh(fullIngredients));
     }, [fullIngredients]);
@@ -105,7 +108,7 @@ function SaladEdit() {
 
         <SaladEditStyle className="content">
             <ShadowBox className='info'>
-                <FlexWrap between>
+                <FlexWrap between width={standardWidth}>
                     <div className='edit-name'>
                         {editName ? <input type="text" placeholder="Salad name here" value={name} onChange={handleNameInput} /> : <label>{currSalad.name}</label>}
                         <ButtonIcon onClick={handleNameEdit}><FontAwesomeIcon icon={faPen} /></ButtonIcon>
@@ -117,13 +120,13 @@ function SaladEdit() {
                     <div className="price">Price: {price}</div>
                 </FlexWrap>
                 <FlexWrap between width={"500px"}>
-                    <div>Actual cost/weight: {cost}€/{cost}g</div>
+                    <div>Actual cost/weight: {cost}€/{weight}g</div>
                     <div>Hours fresh: {hoursFresh}</div>
                 </FlexWrap>
 
             </ShadowBox>
             <ShadowBox>
-                <FlexWrap center column>
+                <FlexWrap center column width={standardWidth}>
                     <h4>Ingredients</h4>
                     {
                         fullIngredients.map((ingredient, index) => {

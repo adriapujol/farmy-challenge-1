@@ -4,7 +4,7 @@ import ButtonIcon from '../styles/ButtonIcon';
 import IngredientStyled from './Ingredient.styled';
 import ServingControl from '../styles/ServingControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan, faCirclePlus, faCircleMinus } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan, faCirclePlus, faCircleMinus, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import FlexWrap from '../styles/FlexWrap';
 import { currentSalad, updateServing, deleteIngredients, updateCost, updatePrice } from '../../features/currentSalad/currentSalad';
 import { productList } from '../../features/products/products';
@@ -59,10 +59,14 @@ function Ingredient({ ingredient }) {
             <div>{currIngredient.name}</div>
             <div>Cost per serving: {currIngredient.costPerServing}</div>
             <ServingControl>
-                <ButtonIcon onClick={handleSubstractServing}><FontAwesomeIcon icon={faCircleMinus} /></ButtonIcon>
+                <div>Servings: </div>
                 <div>{numServings}</div>
-                <ButtonIcon onClick={handleAddServing}><FontAwesomeIcon icon={faCirclePlus} /></ButtonIcon>
+                <FlexWrap column width={"20px"}>
+                    <ButtonIcon onClick={handleAddServing}><FontAwesomeIcon icon={faCaretUp} /></ButtonIcon>
+                    <ButtonIcon onClick={handleSubstractServing}><FontAwesomeIcon icon={faCaretDown} /></ButtonIcon>
+                </FlexWrap>
             </ServingControl>
+            <div>Weight per serving: {currIngredient.weightPerServing}</div>
             <ButtonIcon onClick={deleteIngredient}><FontAwesomeIcon icon={faTrashCan} /></ButtonIcon>
         </IngredientStyled>
     )

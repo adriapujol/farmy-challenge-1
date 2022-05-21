@@ -10,16 +10,16 @@ const IngredientStyled = styled.div`
 
     & > * {
         flex:1;
-        text-align:center;
+        /* text-align:center; */
     }
 
     & > :first-child {
-        text-align:left;
+        /* text-align:left; */
     }
 
     & > :last-child {
        
-        text-align: right;
+        /* text-align: right; */
     }
 `;
 
