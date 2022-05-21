@@ -11,6 +11,7 @@ import FlexWrap from '../styles/FlexWrap';
 import Size from '../size/Size';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { isEmptyObj } from '../../helpers/helpers';
 
 function SaladEdit() {
     const dispatch = useDispatch();
@@ -39,13 +40,6 @@ function SaladEdit() {
         }
     }
 
-    const isEmptyObj = obj => {
-        for (const property in obj) {
-            return false;
-        }
-        return true;
-    }
-
     useEffect(() => {
         setSize(currSalad.size);
         setCost(currSalad.cost);
@@ -53,14 +47,12 @@ function SaladEdit() {
     }, []);
 
     useEffect(() => {
-
         if (!isEmptyObj(saladTypes)) {
             setTargetCost(saladTypes[currSalad.size].targetCost);
             setTargetWeight(saladTypes[currSalad.size].targetWeight);
         };
 
-    }, [currSalad.size]);
-
+    }, [currSalad.size, saladTypes]);
 
     useEffect(() => {
         const tempIng = [];

@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 // import SaladMakerStyle from './SaladMaker.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { currentSalad } from '../../features/currentSalad/currentSalad';
+import { currentSalad, updateCost } from '../../features/currentSalad/currentSalad';
 import { useNavigate } from 'react-router-dom';
 import Grid from '../../components/styles/Grid';
 import Ingredient from '../../components/ingredient/Ingredient';
 import ProductsList from '../../components/products/ProductsList';
 import SaladEdit from '../../components/saladEdit/SaladEdit';
+import { getCost } from '../../helpers/helpers';
 
 function SaladMaker() {
     const dispatch = useDispatch();
@@ -69,6 +70,11 @@ function SaladMaker() {
         setFullIngredients([...tempIng]);
     }, [currSalad.ingredients])
 
+    useEffect(() => {
+        dispatch(updateCost({ cost: getCost(currSalad.ingredients, products) }))
+    }, [currSalad.ingredients]);
+
+
     const handleNameInput = (e) => {
         setName(e.target.value);
     }
@@ -88,32 +94,6 @@ function SaladMaker() {
         <Grid>
             <ProductsList />
             <SaladEdit></SaladEdit>
-            {/* <div className="content">
-                <div className="info">
-                    {editName ? <input type="text" placeholder="Salad name here" value={name} onChange={handleNameInput} /> : <h3>{name}</h3>}
-                    <button onClick={() => setEditName(prevEdit => !prevEdit)}>edit</button>
-                    <div className='size'>{size}</div>
-                    <div className='cost'>cost/weight: {cost}€/ 450g</div>
-                    <div className="price">{price}</div>
-
-                </div>
-                <div className="ingredients">
-                    <h4>Ingredients</h4>
-                    {
-                        (currSalad && currSalad.ingredients.length > 0) && fullIngredients.map((ingredient, index) => {
-                            return <Ingredient
-                                key={ingredient.id}
-                                ingredient={ingredient}
-                            />
-                        })
-
-                    }
-                </div>
-                <div className="controls">
-                    <button className="cancel" onClick={handleCancel}>Cancel</button>
-                    <button className="save" onClick={getTargetCost}>Save</button>
-                </div>
-            </div> */}
         </Grid>
     )
 }

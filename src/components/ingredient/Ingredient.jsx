@@ -6,9 +6,10 @@ import ServingControl from '../styles/ServingControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faCirclePlus, faCircleMinus } from '@fortawesome/free-solid-svg-icons'
 import FlexWrap from '../styles/FlexWrap';
-import { currentSalad, updateServing, deleteIngredients } from '../../features/currentSalad/currentSalad';
+import { currentSalad, updateServing, deleteIngredients, updateCost } from '../../features/currentSalad/currentSalad';
 import { productList } from '../../features/products/products';
 import { productsOptions, removeProduct, addProduct } from "../../features/productsSelect/productsSelect";
+import { getCost } from '../../helpers/helpers';
 
 function Ingredient({ ingredient }) {
 
@@ -26,7 +27,11 @@ function Ingredient({ ingredient }) {
     }, []);
 
     useEffect(() => {
-    }, [currIngredient])
+    }, [currIngredient]);
+
+    useEffect(() => {
+        dispatch(updateCost({ cost: getCost(currIngredientList, products) }));
+    }, [numServings])
 
     const handleAddServing = () => {
         const currIng = { ...currIngredientList.find(ingredient => ingredient.id === id) };
