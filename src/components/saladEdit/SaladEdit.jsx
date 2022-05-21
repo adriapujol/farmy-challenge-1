@@ -12,15 +12,15 @@ import Size from '../size/Size';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { getCost, getPrice, isEmptyObj, combineById, getHoursFresh, getWeight } from '../../helpers/helpers';
+import { addSalad } from '../../features/salads/salads';
 
 function SaladEdit() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const standardWidth = "1000px";
+    const standardWidth = "600px";
 
     const [name, setName] = useState("Salad Name");
-    const [size, setSize] = useState("");
     const [fullIngredients, setFullIngredients] = useState([]);
     const [targetCost, setTargetCost] = useState(0);
     const [targetWeight, setTargetWeight] = useState(0);
@@ -40,7 +40,7 @@ function SaladEdit() {
 
 
     useEffect(() => {
-        setSize(currSalad.size);
+        setName("Salad Name");
         setCost(currSalad.cost);
         setPrice(currSalad.price);
     }, []);
@@ -100,7 +100,23 @@ function SaladEdit() {
             currentStock: 0,
             price: 0
         }));
+        setName("Salad Name");
         navigate("/");
+    }
+
+    const handleAddSalad = () => {
+        dispatch(currentSalad({
+            id: "",
+            name: "Salad name",
+            size: "large",
+            ingredients: [],
+            cost: 0,
+            targetStock: 0,
+            currentStock: 0,
+            price: 0
+        }));
+        dispatch(addSalad(currSalad));
+        navigate("/")
     }
 
 
@@ -113,13 +129,13 @@ function SaladEdit() {
                         {editName ? <input type="text" placeholder="Salad name here" value={name} onChange={handleNameInput} /> : <label>{currSalad.name}</label>}
                         <ButtonIcon onClick={handleNameEdit}><FontAwesomeIcon icon={faPen} /></ButtonIcon>
                     </div>
-                    <Size></Size>
+                    <Size />
                 </FlexWrap>
                 <FlexWrap between>
                     <div className='cost'>Target cost/weight: {targetCost}€/{targetWeight}g</div>
                     <div className="price">Price: {price}</div>
                 </FlexWrap>
-                <FlexWrap between width={"500px"}>
+                <FlexWrap between >
                     <div>Actual cost/weight: {cost}€/{weight}g</div>
                     <div>Hours fresh: {hoursFresh}</div>
                 </FlexWrap>
@@ -141,7 +157,7 @@ function SaladEdit() {
             </ShadowBox>
             <div className="controls">
                 <ButtonStyled cancel onClick={handleCancel}>Cancel</ButtonStyled>
-                <ButtonStyled onClick={() => console.log("Saved")}>Save</ButtonStyled>
+                <ButtonStyled onClick={handleAddSalad}>Save</ButtonStyled>
             </div>
         </SaladEditStyle>
 

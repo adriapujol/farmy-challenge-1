@@ -57,7 +57,7 @@ function Ingredient({ ingredient }) {
     return (
         <IngredientStyled width={"100%"}>
             <div>{currIngredient.name}</div>
-            <div>Cost per serving: {currIngredient.costPerServing}</div>
+            <div>{currIngredient.costPerServing}€</div>
             <ServingControl>
                 <div>Servings: </div>
                 <div>{numServings}</div>
@@ -66,7 +66,7 @@ function Ingredient({ ingredient }) {
                     <ButtonIcon onClick={handleSubstractServing}><FontAwesomeIcon icon={faCaretDown} /></ButtonIcon>
                 </FlexWrap>
             </ServingControl>
-            <div>Weight per serving: {currIngredient.weightPerServing}</div>
+            <div>{currIngredient.weightPerServing}g</div>
             <ButtonIcon onClick={deleteIngredient}><FontAwesomeIcon icon={faTrashCan} /></ButtonIcon>
         </IngredientStyled>
     )

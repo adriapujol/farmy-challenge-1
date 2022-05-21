@@ -3,23 +3,28 @@ import styled from 'styled-components';
 const IngredientStyled = styled.div`
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 95%;
     margin-bottom: 1rem;
 
     & > * {
-        flex:1;
-        /* text-align:center; */
+        flex:2;
+        text-align:center;
     }
 
     & > :first-child {
-        /* text-align:left; */
+        flex:3;
+        text-align:left;
+    }
+    
+    & > :nth-child(2) {
+        text-align:left;
     }
 
     & > :last-child {
-       
-        /* text-align: right; */
+       flex: 1;
+        text-align: right;
     }
 `;
 
