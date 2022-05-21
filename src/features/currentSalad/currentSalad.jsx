@@ -48,9 +48,12 @@ const currentSaladSlice = createSlice({
         updateCost: (state, action) => {
             state.value = { ...state.value, cost: action.payload.cost };
         },
+        updatePrice: (state, action) => {
+            state.value = { ...state.value, price: action.payload.price };
+        }
     }
 });
 
-export const { currentSalad, updateServing, addIngredients, deleteIngredients, updateName, updateSize, updateCost } = currentSaladSlice.actions;
+export const { currentSalad, updateServing, addIngredients, deleteIngredients, updateName, updateSize, updateCost, updatePrice } = currentSaladSlice.actions;
 
 export default currentSaladSlice.reducer;

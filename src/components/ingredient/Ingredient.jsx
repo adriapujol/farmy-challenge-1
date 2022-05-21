@@ -6,10 +6,10 @@ import ServingControl from '../styles/ServingControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faCirclePlus, faCircleMinus } from '@fortawesome/free-solid-svg-icons'
 import FlexWrap from '../styles/FlexWrap';
-import { currentSalad, updateServing, deleteIngredients, updateCost } from '../../features/currentSalad/currentSalad';
+import { currentSalad, updateServing, deleteIngredients, updateCost, updatePrice } from '../../features/currentSalad/currentSalad';
 import { productList } from '../../features/products/products';
 import { productsOptions, removeProduct, addProduct } from "../../features/productsSelect/productsSelect";
-import { getCost } from '../../helpers/helpers';
+import { getCost, getPrice } from '../../helpers/helpers';
 
 function Ingredient({ ingredient }) {
 

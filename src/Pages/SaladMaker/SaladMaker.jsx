@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 // import SaladMakerStyle from './SaladMaker.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { currentSalad, updateCost } from '../../features/currentSalad/currentSalad';
+import { currentSalad, updateCost, updatePrice } from '../../features/currentSalad/currentSalad';
 import { useNavigate } from 'react-router-dom';
 import Grid from '../../components/styles/Grid';
 import Ingredient from '../../components/ingredient/Ingredient';
 import ProductsList from '../../components/products/ProductsList';
 import SaladEdit from '../../components/saladEdit/SaladEdit';
-import { getCost } from '../../helpers/helpers';
+import { getCost, getPrice, isEmptyObj } from '../../helpers/helpers';
 
 function SaladMaker() {
     const dispatch = useDispatch();
@@ -28,20 +28,6 @@ function SaladMaker() {
     const currSalad = useSelector(state => state.currentSalad.value);
     const margin = useSelector(state => state.logic.value.margin);
     const saladTypes = useSelector(state => state.logic.value.saladTypes);
-
-    const isEmptyObj = obj => {
-        for (const property in obj) {
-            return false;
-        }
-        return true;
-    }
-
-    const getTargetCost = () => {
-        if (size === "large") {
-            console.log("this is large");
-            console.log(saladTypes.large);
-        }
-    }
 
     useEffect(() => {
         if (!isEmptyObj(currSalad)) {
@@ -74,6 +60,9 @@ function SaladMaker() {
         dispatch(updateCost({ cost: getCost(currSalad.ingredients, products) }))
     }, [currSalad.ingredients]);
 
+    useEffect(() => {
+        dispatch(updatePrice({ price: getPrice(currSalad.cost, margin) }))
+    }, [currSalad.cost]);
 
     const handleNameInput = (e) => {
         setName(e.target.value);

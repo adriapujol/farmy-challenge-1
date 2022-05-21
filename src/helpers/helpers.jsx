@@ -9,6 +9,8 @@ export const getCost = (ingredientsList, productsList) => {
     return cost;
 };
 
+export const getPrice = (cost, margin) => cost + cost * margin;
+
 
 export const isEmptyObj = obj => {
     for (const property in obj) {
