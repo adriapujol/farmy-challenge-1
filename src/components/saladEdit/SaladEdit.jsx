@@ -113,16 +113,18 @@ function SaladEdit() {
                     <Size></Size>
                 </FlexWrap>
                 <FlexWrap between>
-                    <div className='cost'>Target cost/weight: {targetCost}€/ {targetWeight}g</div>
+                    <div className='cost'>Target cost/weight: {targetCost}€/{targetWeight}g</div>
                     <div className="price">Price: {price}</div>
+                </FlexWrap>
+                <FlexWrap between width={"500px"}>
+                    <div>Actual cost/weight: {cost}€/{cost}g</div>
+                    <div>Hours fresh: {hoursFresh}</div>
                 </FlexWrap>
 
             </ShadowBox>
             <ShadowBox>
                 <FlexWrap center column>
-                    <div>Cost: {cost}</div>
                     <h4>Ingredients</h4>
-                    <div>Hours fresh: {hoursFresh}</div>
                     {
                         fullIngredients.map((ingredient, index) => {
                             return <Ingredient
