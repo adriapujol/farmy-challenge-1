@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SaladEditStyle from './SaladEdit.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { currentSalad, updateName, updateCost, updatePrice } from '../../features/currentSalad/currentSalad';
+import { currentSalad, updateName, updateCost, updatePrice, updateHoursFresh } from '../../features/currentSalad/currentSalad';
 import { useNavigate } from 'react-router-dom';
 import Ingredient from '../../components/ingredient/Ingredient';
 import ButtonStyled from '../styles/Button';
@@ -11,7 +11,7 @@ import FlexWrap from '../styles/FlexWrap';
 import Size from '../size/Size';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
-import { getCost, getPrice, isEmptyObj } from '../../helpers/helpers';
+import { getCost, getPrice, isEmptyObj, combineById, getHoursFresh } from '../../helpers/helpers';
 
 function SaladEdit() {
     const dispatch = useDispatch();
@@ -26,6 +26,7 @@ function SaladEdit() {
     const [cost, setCost] = useState(0);
     const [price, setPrice] = useState(0);
     const [editName, setEditName] = useState(false);
+    const [hoursFresh, setHoursFresh] = useState(0);
 
 
 
@@ -35,10 +36,6 @@ function SaladEdit() {
     const margin = useSelector(state => state.logic.value.margin);
     const saladTypes = useSelector(state => state.logic.value.saladTypes);
 
-    const getTargetCost = () => {
-        if (size === "large") {
-        }
-    }
 
     useEffect(() => {
         setSize(currSalad.size);
@@ -55,21 +52,30 @@ function SaladEdit() {
     }, [currSalad.size, saladTypes]);
 
     useEffect(() => {
-        const tempIng = [];
-        currSalad.ingredients.forEach(ingredient => {
-            const tempProd = products.find(prod => prod.id === ingredient.id);
-            tempIng.push(tempProd);
-        })
-        setFullIngredients([...tempIng]);
+        console.log("COMBINED", combineById(currSalad.ingredients, products))
+        setFullIngredients(combineById(currSalad.ingredients, products))
     }, [currSalad.ingredients])
 
     useEffect(() => {
-        dispatch(updateCost({ cost: getCost(currSalad.ingredients, products) }))
-    }, [currSalad.ingredients]);
+        dispatch(updateCost({ cost: getCost(fullIngredients) }));
+        setHoursFresh(getHoursFresh(fullIngredients));
+        console.log("FULL INGREDIENTS", fullIngredients)
+        console.log("GETTING HOURS", getHoursFresh(fullIngredients));
+    }, [fullIngredients]);
 
     useEffect(() => {
+        setCost(currSalad.cost.toFixed(2));
         dispatch(updatePrice({ price: getPrice(currSalad.cost, margin) }))
-    }, [currSalad.cost]);
+    }, [currSalad.cost, margin]);
+
+    useEffect(() => {
+        setPrice(currSalad.price.toFixed(2));
+    }, [currSalad.price])
+
+    useEffect(() => {
+        console.log("hours fresh useEFFECT:", hoursFresh)
+        dispatch(updateHoursFresh(hoursFresh));
+    }, [hoursFresh])
 
     const handleNameInput = (e) => {
         setName(e.target.value);
@@ -114,7 +120,9 @@ function SaladEdit() {
             </ShadowBox>
             <ShadowBox>
                 <FlexWrap center column>
+                    <div>Cost: {cost}</div>
                     <h4>Ingredients</h4>
+                    <div>Hours fresh: {hoursFresh}</div>
                     {
                         fullIngredients.map((ingredient, index) => {
                             return <Ingredient
@@ -128,7 +136,7 @@ function SaladEdit() {
             </ShadowBox>
             <div className="controls">
                 <ButtonStyled cancel onClick={handleCancel}>Cancel</ButtonStyled>
-                <ButtonStyled onClick={getTargetCost}>Save</ButtonStyled>
+                <ButtonStyled onClick={() => console.log("Saved")}>Save</ButtonStyled>
             </div>
         </SaladEditStyle>
 

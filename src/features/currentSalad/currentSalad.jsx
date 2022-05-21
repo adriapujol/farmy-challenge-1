@@ -11,7 +11,8 @@ const currentSaladSlice = createSlice({
             cost: 0,
             targetStock: 0,
             currentStock: 0,
-            price: 0
+            price: 0,
+            hoursFresh: 0,
         }
     },
     reducers: {
@@ -50,10 +51,13 @@ const currentSaladSlice = createSlice({
         },
         updatePrice: (state, action) => {
             state.value = { ...state.value, price: action.payload.price };
-        }
+        },
+        updateHoursFresh: (state, action) => {
+            state.value = { ...state.value, hoursFresh: action.payload.hoursFresh };
+        },
     }
 });
 
-export const { currentSalad, updateServing, addIngredients, deleteIngredients, updateName, updateSize, updateCost, updatePrice } = currentSaladSlice.actions;
+export const { currentSalad, updateServing, addIngredients, deleteIngredients, updateName, updateSize, updateCost, updatePrice, updateHoursFresh } = currentSaladSlice.actions;
 
 export default currentSaladSlice.reducer;

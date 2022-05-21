@@ -7,10 +7,6 @@ const FlexWrap = styled.div`
     align-items: ${props => props.center ? "center" : ""};
     width: ${props => props.width ? props.width : "auto"};
     height: ${props => props.height ? props.width : "auto"};
-
-    & > * {
-        padding: height: ${props => props.childPad ? props.childPad : 0};
-    } 
 `;
 
 export default FlexWrap;

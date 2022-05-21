@@ -9,7 +9,7 @@ import FlexWrap from '../styles/FlexWrap';
 import { currentSalad, updateServing, deleteIngredients, updateCost, updatePrice } from '../../features/currentSalad/currentSalad';
 import { productList } from '../../features/products/products';
 import { productsOptions, removeProduct, addProduct } from "../../features/productsSelect/productsSelect";
-import { getCost, getPrice } from '../../helpers/helpers';
+import { getCost, getPrice, combineById } from '../../helpers/helpers';
 
 function Ingredient({ ingredient }) {
 
@@ -19,7 +19,7 @@ function Ingredient({ ingredient }) {
     const products = useSelector(state => state.products.value);
     const [numServings, setNumServings] = useState(1);
     const [currIngredient, setCurrentIngredient] = useState({})
-    const { id, name, costPerServing, supplier, hoursFresh } = ingredient;
+    const { id } = ingredient;
 
     useEffect(() => {
         const currProd = products.find(prod => prod.id === id);
@@ -30,7 +30,7 @@ function Ingredient({ ingredient }) {
     }, [currIngredient]);
 
     useEffect(() => {
-        dispatch(updateCost({ cost: getCost(currIngredientList, products) }));
+        dispatch(updateCost({ cost: getCost(combineById(currIngredientList, products)) }));
     }, [numServings])
 
     const handleAddServing = () => {
@@ -49,7 +49,9 @@ function Ingredient({ ingredient }) {
 
     const deleteIngredient = () => {
         dispatch(deleteIngredients({ id: id }));
-        dispatch(addProduct({ ...ingredient }));
+        const tempIngredient = { ...ingredient };
+        delete tempIngredient.numOfServings;
+        dispatch(addProduct(tempIngredient));
     }
 
     return (

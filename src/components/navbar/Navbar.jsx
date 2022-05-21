@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { currentSalad } from '../../features/currentSalad/currentSalad';
+import { productsOptions } from "../../features/productsSelect/productsSelect";
 import { v4 as uuid } from 'uuid';
 
 export default function Navbar() {
 
     const dispatch = useDispatch();
+    const products = useSelector(state => state.products.value);
 
     const handleCreate = () => {
         dispatch(currentSalad(
@@ -18,14 +20,19 @@ export default function Navbar() {
                 cost: 0,
                 targetStock: 0,
                 currentStock: 0,
-                price: 0
+                price: 0,
+                hoursFresh: 0
             }
         ));
     }
 
+    const handleHome = () => {
+        dispatch(productsOptions(products));
+    }
+
     return (
         <nav>
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={handleHome}>Home</Link>
             <Link to="/create" onClick={handleCreate}>Create</Link>
         </nav>
     )
