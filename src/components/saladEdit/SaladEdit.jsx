@@ -20,6 +20,8 @@ function SaladEdit() {
     const [name, setName] = useState("Salad Name");
     const [size, setSize] = useState("");
     const [fullIngredients, setFullIngredients] = useState([]);
+    const [targetCost, setTargetCost] = useState(0);
+    const [targetWeight, setTargetWeight] = useState(0);
     const [cost, setCost] = useState(0);
     const [price, setPrice] = useState(0);
     const [editName, setEditName] = useState(false);
@@ -34,9 +36,14 @@ function SaladEdit() {
 
     const getTargetCost = () => {
         if (size === "large") {
-            console.log("this is large");
-            console.log(saladTypes.large);
         }
+    }
+
+    const isEmptyObj = obj => {
+        for (const property in obj) {
+            return false;
+        }
+        return true;
     }
 
     useEffect(() => {
@@ -44,6 +51,16 @@ function SaladEdit() {
         setCost(currSalad.cost);
         setPrice(currSalad.price);
     }, []);
+
+    useEffect(() => {
+
+        if (!isEmptyObj(saladTypes)) {
+            setTargetCost(saladTypes[currSalad.size].targetCost);
+            setTargetWeight(saladTypes[currSalad.size].targetWeight);
+        };
+
+    }, [currSalad.size]);
+
 
     useEffect(() => {
         const tempIng = [];
@@ -82,15 +99,17 @@ function SaladEdit() {
 
         <SaladEditStyle className="content">
             <ShadowBox className='info'>
-                <FlexWrap space>
+                <FlexWrap between>
                     <div className='edit-name'>
                         {editName ? <input type="text" placeholder="Salad name here" value={name} onChange={handleNameInput} /> : <label>{currSalad.name}</label>}
                         <ButtonIcon onClick={handleNameEdit}><FontAwesomeIcon icon={faPen} /></ButtonIcon>
                     </div>
                     <Size></Size>
                 </FlexWrap>
-                <div className='cost'>cost/weight: {cost}€/ 450g</div>
-                <div className="price">{price}</div>
+                <FlexWrap between>
+                    <div className='cost'>Target cost/weight: {targetCost}€/ {targetWeight}g</div>
+                    <div className="price">Price: {price}</div>
+                </FlexWrap>
 
             </ShadowBox>
             <ShadowBox>
@@ -108,8 +127,8 @@ function SaladEdit() {
                 </FlexWrap>
             </ShadowBox>
             <div className="controls">
-                <ButtonStyled className="cancel" onClick={handleCancel}>Cancel</ButtonStyled>
-                <ButtonStyled className="save" onClick={getTargetCost}>Save</ButtonStyled>
+                <ButtonStyled cancel onClick={handleCancel}>Cancel</ButtonStyled>
+                <ButtonStyled onClick={getTargetCost}>Save</ButtonStyled>
             </div>
         </SaladEditStyle>
 

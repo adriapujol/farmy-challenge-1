@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ButtonIcon from '../styles/ButtonIcon';
+import IngredientStyled from './Ingredient.styled';
+import ServingControl from '../styles/ServingControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan, faCirclePlus, faCircleMinus } from '@fortawesome/free-solid-svg-icons'
 import FlexWrap from '../styles/FlexWrap';
 import { currentSalad, updateServing, deleteIngredients } from '../../features/currentSalad/currentSalad';
 import { productList } from '../../features/products/products';
@@ -19,21 +21,16 @@ function Ingredient({ ingredient }) {
     const { id, name, costPerServing, supplier, hoursFresh } = ingredient;
 
     useEffect(() => {
-        console.log("CURR INGREDIENTS FIRST RENDER:", currIngredient);
         const currProd = products.find(prod => prod.id === id);
-        console.log("CURRENT PRODUCT FILTER:", currProd)
         setCurrentIngredient(currProd);
     }, []);
 
     useEffect(() => {
-        console.log("CURRENT PRODUCT WHEN CHANGE:", currIngredient)
     }, [currIngredient])
 
     const handleAddServing = () => {
         const currIng = { ...currIngredientList.find(ingredient => ingredient.id === id) };
-        console.log("FUCK", currIng);
         currIng.numOfServings = ++currIng.numOfServings;
-        console.log("UPDATE CHECK", currIng);
         setNumServings(prevState => ++prevState);
         dispatch(updateServing(currIng));
     }
@@ -41,7 +38,6 @@ function Ingredient({ ingredient }) {
     const handleSubstractServing = () => {
         const currIng = { ...currIngredientList.find(ingredient => ingredient.id === id) };
         if (currIng.numOfServings > 1) currIng.numOfServings = --currIng.numOfServings;
-        console.log("UPDATE CHECK", currIng);
         if (numServings > 1) setNumServings(prevState => --prevState);
         dispatch(updateServing(currIng));
     }
@@ -51,18 +47,17 @@ function Ingredient({ ingredient }) {
         dispatch(addProduct({ ...ingredient }));
     }
 
-    console.log("INGREDIENT", currIngredient);
-    console.log("THIS IS THE ID", id);
-
     return (
-        <FlexWrap even>
+        <IngredientStyled width={"100%"}>
             <div>{currIngredient.name}</div>
-            <div>{currIngredient.costPerServing}</div>
-            <div>{numServings}</div>
-            <ButtonIcon onClick={handleSubstractServing}>-</ButtonIcon>
-            <ButtonIcon onClick={handleAddServing}>+</ButtonIcon>
+            <div>Cost per serving: {currIngredient.costPerServing}</div>
+            <ServingControl>
+                <ButtonIcon onClick={handleSubstractServing}><FontAwesomeIcon icon={faCircleMinus} /></ButtonIcon>
+                <div>{numServings}</div>
+                <ButtonIcon onClick={handleAddServing}><FontAwesomeIcon icon={faCirclePlus} /></ButtonIcon>
+            </ServingControl>
             <ButtonIcon onClick={deleteIngredient}><FontAwesomeIcon icon={faTrashCan} /></ButtonIcon>
-        </FlexWrap>
+        </IngredientStyled>
     )
 }
 

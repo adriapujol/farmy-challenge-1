@@ -61,13 +61,11 @@ function SaladMaker() {
     }, [currSalad]);
 
     useEffect(() => {
-        console.log("CHANGED INGREDIENTS LIST FULL")
         const tempIng = [];
         currSalad.ingredients.forEach(ingredient => {
             const tempProd = products.find(prod => prod.id === ingredient.id);
             tempIng.push(tempProd);
         })
-        console.log("TEMP ING CHECK", tempIng);
         setFullIngredients([...tempIng]);
     }, [currSalad.ingredients])
 

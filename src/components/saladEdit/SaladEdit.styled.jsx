@@ -8,12 +8,13 @@ const SaladEditStyle = styled.div`
     padding: 2rem;
 
     .info {
-        /* background-color: red; */
-        border: 2px solid black;
+        border: 2px solid lightgray;
         
     }
 
     .edit-name {
+        /* display: flex; */
+        /* align-items: center; */
         label, input {
             font-size: 2rem;
             margin-right: 0.5rem;
