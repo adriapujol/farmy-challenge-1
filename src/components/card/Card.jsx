@@ -3,6 +3,8 @@ import CardStyle from './Card.styled';
 import { useDispatch } from 'react-redux';
 import { currentSalad } from '../../features/currentSalad/currentSalad';
 import { useNavigate } from 'react-router-dom';
+import FlexWrap from '../styles/FlexWrap';
+import ShadowBox from '../styles/ShadowBox';
 
 
 function Card({ salad }) {
@@ -17,22 +19,25 @@ function Card({ salad }) {
     }
 
     return (
-        <CardStyle>
-            <h3>{name}</h3>
-            <p>{size}</p>
-            <ul>
-                {
-                    ingredients.map((item, index) => {
-                        return <li key={index}>{item.id}</li>
-                    })
-                }
-            </ul>
-            <p>{cost}</p>
-            <p>{targetStock}</p>
-            <p>{currentStock}</p>
-            <p>{price}</p>
-            <button onClick={handleEdit}>Edit</button>
-        </CardStyle>
+        <ShadowBox>
+
+            <FlexWrap column center>
+                <h3>{name}</h3>
+                <p>{size}</p>
+                <ul>
+                    {
+                        ingredients.map((item, index) => {
+                            return <li key={index}>{item.id}</li>
+                        })
+                    }
+                </ul>
+                <p>{cost}</p>
+                <p>{targetStock}</p>
+                <p>{currentStock}</p>
+                <p>{price}</p>
+                <button onClick={handleEdit}>Edit</button>
+            </FlexWrap>
+        </ShadowBox>
     )
 }
 

@@ -1,46 +1,74 @@
-import React, { } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { currentSalad, updateServing } from '../../features/currentSalad/currentSalad';
+import ButtonIcon from '../styles/ButtonIcon';
+import IngredientStyled from './Ingredient.styled';
+import ServingControl from '../styles/ServingControl';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan, faCirclePlus, faCircleMinus, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import FlexWrap from '../styles/FlexWrap';
+import { currentSalad, updateServing, deleteIngredients, updateCost, updatePrice } from '../../features/currentSalad/currentSalad';
 import { productList } from '../../features/products/products';
+import { productsOptions, removeProduct, addProduct } from "../../features/productsSelect/productsSelect";
+import { getCost, getPrice, combineById } from '../../helpers/helpers';
 
-function Ingredient({ ingredient, index, setIngredients }) {
+function Ingredient({ ingredient }) {
 
     const dispatch = useDispatch();
 
-    const currIngredient = useSelector((state) => state.currentSalad.value.ingredients[index]);
-    const products = useSelector((state) => state.products.value);
+    const currIngredientList = useSelector(state => state.currentSalad.value.ingredients);
+    const products = useSelector(state => state.products.value);
+    const [numServings, setNumServings] = useState(1);
+    const [currIngredient, setCurrentIngredient] = useState({})
+    const { id } = ingredient;
 
-    const { id, name, costPerServing, supplier, hoursFresh } = ingredient;
+    useEffect(() => {
+        const currProd = products.find(prod => prod.id === id);
+        setCurrentIngredient(currProd);
+    }, []);
+
+    useEffect(() => {
+    }, [currIngredient]);
+
+    useEffect(() => {
+        dispatch(updateCost({ cost: getCost(combineById(currIngredientList, products)) }));
+    }, [numServings])
 
     const handleAddServing = () => {
-        const currIng = { ...currIngredient };
+        const currIng = { ...currIngredientList.find(ingredient => ingredient.id === id) };
         currIng.numOfServings = ++currIng.numOfServings;
-        console.log("UPDATE CHECK", currIng);
+        setNumServings(prevState => ++prevState);
         dispatch(updateServing(currIng));
-        // cosnt currIngred = 
-        // dispatch(currentSalad({ ...currSalad, ingredients: []numOfServings: ++currSalad.numOfServings }));
     }
 
     const handleSubstractServing = () => {
-        const currIng = { ...currIngredient };
-        if (currIng.numOfServings !== 0) currIng.numOfServings = --currIng.numOfServings;
-        console.log("UPDATE CHECK", currIng);
+        const currIng = { ...currIngredientList.find(ingredient => ingredient.id === id) };
+        if (currIng.numOfServings > 1) currIng.numOfServings = --currIng.numOfServings;
+        if (numServings > 1) setNumServings(prevState => --prevState);
         dispatch(updateServing(currIng));
-        // cosnt currIngred = 
-        // dispatch(currentSalad({ ...currSalad, ingredients: []numOfServings: ++currSalad.numOfServings }));
     }
 
-    console.log("INGREDIENT", currIngredient);
+    const deleteIngredient = () => {
+        dispatch(deleteIngredients({ id: id }));
+        const tempIngredient = { ...ingredient };
+        delete tempIngredient.numOfServings;
+        dispatch(addProduct(tempIngredient));
+    }
 
     return (
-        <div>
-            <div>{name}</div>
-            <div>{costPerServing}</div>
-            <div>{supplier}</div>
-            {/* <div>{currSalad.ingredientnumOfServings}</div> */}
-            <button onClick={handleAddServing}>+</button>
-            <button onClick={handleSubstractServing}>-</button>
-        </div>
+        <IngredientStyled width={"100%"}>
+            <div>{currIngredient.name}</div>
+            <div>{currIngredient.costPerServing}€</div>
+            <ServingControl>
+                <div>Servings: </div>
+                <div>{numServings}</div>
+                <FlexWrap column width={"20px"}>
+                    <ButtonIcon onClick={handleAddServing}><FontAwesomeIcon icon={faCaretUp} /></ButtonIcon>
+                    <ButtonIcon onClick={handleSubstractServing}><FontAwesomeIcon icon={faCaretDown} /></ButtonIcon>
+                </FlexWrap>
+            </ServingControl>
+            <div>{currIngredient.weightPerServing}g</div>
+            <ButtonIcon onClick={deleteIngredient}><FontAwesomeIcon icon={faTrashCan} /></ButtonIcon>
+        </IngredientStyled>
     )
 }
 
