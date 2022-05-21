@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SaladEditStyle from './SaladEdit.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { currentSalad, updateName } from '../../features/currentSalad/currentSalad';
+import { currentSalad, updateName, updateCost, updatePrice } from '../../features/currentSalad/currentSalad';
 import { useNavigate } from 'react-router-dom';
 import Ingredient from '../../components/ingredient/Ingredient';
 import ButtonStyled from '../styles/Button';
@@ -11,7 +11,7 @@ import FlexWrap from '../styles/FlexWrap';
 import Size from '../size/Size';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
-import { isEmptyObj } from '../../helpers/helpers';
+import { getCost, getPrice, isEmptyObj } from '../../helpers/helpers';
 
 function SaladEdit() {
     const dispatch = useDispatch();
@@ -62,6 +62,14 @@ function SaladEdit() {
         })
         setFullIngredients([...tempIng]);
     }, [currSalad.ingredients])
+
+    useEffect(() => {
+        dispatch(updateCost({ cost: getCost(currSalad.ingredients, products) }))
+    }, [currSalad.ingredients]);
+
+    useEffect(() => {
+        dispatch(updatePrice({ price: getPrice(currSalad.cost, margin) }))
+    }, [currSalad.cost]);
 
     const handleNameInput = (e) => {
         setName(e.target.value);
