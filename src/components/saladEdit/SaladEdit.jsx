@@ -5,6 +5,7 @@ import { currentSalad, updateName } from '../../features/currentSalad/currentSal
 import { useNavigate } from 'react-router-dom';
 import Ingredient from '../../components/ingredient/Ingredient';
 import ButtonStyled from '../styles/Button';
+import ButtonIcon from '../styles/ButtonIcon';
 import ShadowBox from '../styles/ShadowBox';
 import FlexWrap from '../styles/FlexWrap';
 import Size from '../size/Size';
@@ -81,10 +82,10 @@ function SaladEdit() {
 
         <SaladEditStyle className="content">
             <ShadowBox className='info'>
-                <FlexWrap>
+                <FlexWrap space>
                     <div className='edit-name'>
                         {editName ? <input type="text" placeholder="Salad name here" value={name} onChange={handleNameInput} /> : <label>{currSalad.name}</label>}
-                        <button onClick={handleNameEdit}><FontAwesomeIcon icon={faPen} /></button>
+                        <ButtonIcon onClick={handleNameEdit}><FontAwesomeIcon icon={faPen} /></ButtonIcon>
                     </div>
                     <Size></Size>
                 </FlexWrap>
@@ -92,18 +93,20 @@ function SaladEdit() {
                 <div className="price">{price}</div>
 
             </ShadowBox>
-            <div className="ingredients">
-                <h4>Ingredients</h4>
-                {
-                    fullIngredients.map((ingredient, index) => {
-                        return <Ingredient
-                            key={ingredient.id}
-                            ingredient={ingredient}
-                        />
-                    })
+            <ShadowBox>
+                <FlexWrap center column>
+                    <h4>Ingredients</h4>
+                    {
+                        fullIngredients.map((ingredient, index) => {
+                            return <Ingredient
+                                key={ingredient.id}
+                                ingredient={ingredient}
+                            />
+                        })
 
-                }
-            </div>
+                    }
+                </FlexWrap>
+            </ShadowBox>
             <div className="controls">
                 <ButtonStyled className="cancel" onClick={handleCancel}>Cancel</ButtonStyled>
                 <ButtonStyled className="save" onClick={getTargetCost}>Save</ButtonStyled>

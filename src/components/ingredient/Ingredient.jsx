@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import ButtonIcon from '../styles/ButtonIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import FlexWrap from '../styles/FlexWrap';
 import { currentSalad, updateServing, deleteIngredients } from '../../features/currentSalad/currentSalad';
 import { productList } from '../../features/products/products';
 import { productsOptions, removeProduct, addProduct } from "../../features/productsSelect/productsSelect";
@@ -25,15 +29,6 @@ function Ingredient({ ingredient }) {
         console.log("CURRENT PRODUCT WHEN CHANGE:", currIngredient)
     }, [currIngredient])
 
-    // useEffect(() => {
-    //     console.log("IGNREDIENTS LIST", currIngredientList);
-    //     const ingPosition = currIngredientList.findIndex(ingredient => ingredient.id === id);
-    //     const currIng = currIngredientList[ingPosition];
-    //     setCurrentIngredient(currIng);
-    //     setNumServings(currIng.numOfServings);
-    // }, [currIngredientList])
-
-
     const handleAddServing = () => {
         const currIng = { ...currIngredientList.find(ingredient => ingredient.id === id) };
         console.log("FUCK", currIng);
@@ -52,7 +47,6 @@ function Ingredient({ ingredient }) {
     }
 
     const deleteIngredient = () => {
-        // const currIng = currIngredientList.filter(ingredient => ingredient.id !== id);
         dispatch(deleteIngredients({ id: id }));
         dispatch(addProduct({ ...ingredient }));
     }
@@ -61,14 +55,14 @@ function Ingredient({ ingredient }) {
     console.log("THIS IS THE ID", id);
 
     return (
-        <div>
+        <FlexWrap even>
             <div>{currIngredient.name}</div>
             <div>{currIngredient.costPerServing}</div>
             <div>{numServings}</div>
-            <button onClick={handleAddServing}>+</button>
-            <button onClick={handleSubstractServing}>-</button>
-            <button onClick={deleteIngredient}>delete</button>
-        </div>
+            <ButtonIcon onClick={handleSubstractServing}>-</ButtonIcon>
+            <ButtonIcon onClick={handleAddServing}>+</ButtonIcon>
+            <ButtonIcon onClick={deleteIngredient}><FontAwesomeIcon icon={faTrashCan} /></ButtonIcon>
+        </FlexWrap>
     )
 }
 
