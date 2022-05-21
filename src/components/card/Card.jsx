@@ -15,7 +15,7 @@ function Card({ salad }) {
 
     const handleEdit = () => {
         dispatch(currentSalad(salad));
-        navigate("/edit");
+        navigate("/create");
     }
 
     return (

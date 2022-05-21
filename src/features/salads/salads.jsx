@@ -13,10 +13,19 @@ const saladsSlice = createSlice({
         removeSalad: (state, action) => {
             state.value = state.value.filter(salad => salad.id !== action.payload.id);
         },
+        updateSalad: (state, action) => {
+            const saladList = [...state.value];
+            const newSalads = saladList.map(salad => {
+                if (salad.id === action.payload.id) return action.payload;
+                return salad;
+            })
+            console.log("REDUCER NEW SALAD", newSalads)
+            state.value = [...newSalads];
+        }
     }
 });
 
-export const { saladsList, addSalad, removeSalad } = saladsSlice.actions;
+export const { saladsList, addSalad, removeSalad, updateSalad } = saladsSlice.actions;
 
 export default saladsSlice.reducer;
 

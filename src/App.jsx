@@ -35,7 +35,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<SaladMaker />} />
-          <Route path="/edit" element={<SaladMaker />} />
         </Routes>
       </div>
     </Router>
