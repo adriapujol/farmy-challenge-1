@@ -19,9 +19,9 @@ function Card({ salad }) {
     }
 
     return (
-        <ShadowBox>
 
-            <FlexWrap column center>
+        <FlexWrap column center height={"300px"} width={"300px"}>
+            <ShadowBox>
                 <h3>{name}</h3>
                 <p>{size}</p>
                 <ul>
@@ -36,8 +36,8 @@ function Card({ salad }) {
                 <p>{currentStock}</p>
                 <p>{price}</p>
                 <button onClick={handleEdit}>Edit</button>
-            </FlexWrap>
-        </ShadowBox>
+            </ShadowBox>
+        </FlexWrap>
     )
 }
 

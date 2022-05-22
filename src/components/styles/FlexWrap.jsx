@@ -6,7 +6,8 @@ const FlexWrap = styled.div`
     justify-content: ${props => props.center ? "center" : props.between ? "space-between" : props.around ? "space-around" : props.evently ? "space-evently" : ""};
     align-items: ${props => props.center ? "center" : ""};
     width: ${props => props.width ? props.width : "auto"};
-    height: ${props => props.height ? props.width : "auto"};
+    height: ${props => props.height ? props.height : "auto"};
+    padding: ${props => props.padding ? props.padding : "auto"};;
 `;
 
 export default FlexWrap;
