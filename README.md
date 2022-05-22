@@ -1,4 +1,7 @@
 # Salad designer and planner
+
+## Look at my attempt: [DEMO](https://melskitchen.netlify.app/)
+
 ### Technical specs:
 - React JS app.
 - Main dependencies (all in `package.json`):
