@@ -9,7 +9,6 @@ const FlexWrap = styled.div`
     height: ${props => props.height ? props.height : "auto"};
     max-height: ${props => props.maxHeight ? props.maxHeight : "auto"};
     padding: ${props => props.padding ? props.padding : "auto"};
-    overflow-y: ${props => props.scrollY ? "scroll" : "auto"};;
 `;
 
 export default FlexWrap;

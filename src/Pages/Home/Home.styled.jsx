@@ -7,7 +7,7 @@ const HomeStyled = styled.div`
     flex-wrap: wrap;
     gap: 2rem;
     width: 100%;
-
+    margin-top: 10vh;
 
 `;
 

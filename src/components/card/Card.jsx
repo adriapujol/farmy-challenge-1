@@ -30,13 +30,13 @@ function Card({ salad }) {
         <CardStyle>
             <h3>{name}</h3>
             <p>{size}</p>
-            <ul>
+            {/* <ul>
                 {
                     ingredients.map((item, index) => {
                         return <li key={index}>{item.id}</li>
                     })
                 }
-            </ul>
+            </ul> */}
             <p>Cost: {cost.toFixed(2)}€</p>
             <p>Price: {price.toFixed(2)}€</p>
             <FlexWrap between>
