@@ -19,9 +19,9 @@ function Product({ product }) {
     }
 
     return (
-        <ProductStyled>
+        <ProductStyled onClick={handleAddIngredient}>
             <label>{product.name}</label>
-            <ButtonIcon onClick={handleAddIngredient}><FontAwesomeIcon icon={faCirclePlus} /></ButtonIcon>
+            <FontAwesomeIcon icon={faCirclePlus} />
         </ProductStyled>
     )
 }

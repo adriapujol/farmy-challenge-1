@@ -14,6 +14,7 @@ import { getCost, getPrice, isEmptyObj, combineById, getHoursFresh, getWeight } 
 import { addSalad, updateSalad } from '../../features/salads/salads';
 import { v4 as uuid } from 'uuid';
 import DataService from 'simple-localstorage-data-service-stub';
+import ButtonPair from '../styles/ButtonPair';
 
 // const dataService = DataService();
 
@@ -156,12 +157,12 @@ function SaladEdit() {
                 </FlexWrap>
                 <FlexWrap column width={"100%"}>
                     <FlexWrap between>
-                        <div className='cost'>Target cost/weight: {targetCost}€/{targetWeight}g</div>
-                        <div className="price">Price: {price}</div>
+                        <div className='cost'><strong>Target cost/weight:</strong> {targetCost}€/{targetWeight}g</div>
+                        <div className="price"><strong>Price:</strong> {price}€</div>
                     </FlexWrap>
                     <FlexWrap between >
-                        <div>Actual cost/weight: {cost}€/{weight}g</div>
-                        <div>Hours fresh: {hoursFresh}</div>
+                        <div><strong>Actual cost/weight:</strong> {cost}€/{weight}g</div>
+                        <div><strong>Hours fresh:</strong> {hoursFresh}</div>
                     </FlexWrap>
                 </FlexWrap>
             </FlexWrap>
@@ -169,10 +170,10 @@ function SaladEdit() {
                 <h4>Ingredients</h4>
                 <IngredientsTable ingredients={fullIngredients} />
             </FlexWrap>
-            <div className="controls">
+            <ButtonPair>
                 <ButtonStyled cancel onClick={handleCancel}>Cancel</ButtonStyled>
                 <ButtonStyled onClick={handleAddSalad}>Save</ButtonStyled>
-            </div>
+            </ButtonPair>
         </SaladEditStyle>
 
     )

@@ -1,14 +1,35 @@
 import styled from 'styled-components';
+import { yellow, green, lightgrey, darkgreen, darkgrey, white, black } from '../../colors';
 
-const ProductStyled = styled.div`
+
+const ProductStyled = styled.button`
+    cursor: pointer;
+    
+    * {
+        cursor: pointer;
+    }
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    max-width: 300px;
+    width: 100%;
+    color: ${black};
+    background-color: transparent;
+    border-style: none;
+    font-size: 1.1rem;
 
-    button {
-        cursor: pointer;
+    .fa-circle-plus {
+        display: none;
+    }
+
+    &:hover{
+        color: white;
+        background-color: ${darkgreen};
+
+        .fa-circle-plus {
+            display: inline-block;
+        }
     }
 `
 

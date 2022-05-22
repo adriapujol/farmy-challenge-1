@@ -1,13 +1,8 @@
 import styled from 'styled-components';
+import { yellow, green, lightgrey, darkgreen, darkgrey, white, black, lightgreen } from '../../colors';
 
 const ProductsStyled = styled.div`
 
-    
-    /* padding: 1rem 2rem; */
-    /* display: flex; */
-    /* justify-content: center; */
-    /* flex-direction: column; */
-    /* align-items: center; */
     .input-box {
         padding: 1rem 2rem;
         width: 100%;
@@ -16,23 +11,15 @@ const ProductsStyled = styled.div`
 
     input {
         width: 100%;
-        /* margin: 1rem; */
-        /* left: auto;
-        right: auto; */
         padding: 0.3rem;
+        text-align: center;
     }
     .products-list {
         overflow-y: scroll;
-        /* overflow: auto; */
         height: 90vh;
-        
-        /* width: ; */
-        
     }
 
-    background-color: #D1F5BE;
-
-
+    background-color: ${lightgreen};
 `;
 
 

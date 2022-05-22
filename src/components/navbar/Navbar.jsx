@@ -5,6 +5,7 @@ import { currentSalad } from '../../features/currentSalad/currentSalad';
 import { productsOptions } from "../../features/productsSelect/productsSelect";
 import { v4 as uuid } from 'uuid';
 import NavbarStyled from './Navbar.styled';
+import FlexWrap from '../styles/FlexWrap';
 
 export default function Navbar() {
 
@@ -34,8 +35,10 @@ export default function Navbar() {
 
     return (
         <NavbarStyled>
-            <Link to="/" onClick={handleHome}>Home</Link>
-            <Link to="/create" onClick={handleCreate}>Create</Link>
+            <FlexWrap between heigth={"100%"} width={"95%"}>
+                <Link to="/" onClick={handleHome}>Mel's Kitchen</Link>
+                <Link to="/create" onClick={handleCreate}>Create</Link>
+            </FlexWrap>
         </NavbarStyled>
     )
 }

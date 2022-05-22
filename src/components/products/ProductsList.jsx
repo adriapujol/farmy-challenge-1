@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Product from '../product/Product';
 import { removeProduct } from "../../features/productsSelect/productsSelect";
-import FlexWrap from '../styles/FlexWrap';
 import ProductsStyled from './Products.styled';
 
 function ProductsList() {
@@ -30,7 +29,7 @@ function ProductsList() {
     return (
         <ProductsStyled className="sidebar">
             <div className="input-box">
-                <input type="text" onChange={handleSearch} />
+                <input type="text" onChange={handleSearch} placeholder="Search..." />
             </div>
             <div className="products-list">
                 {

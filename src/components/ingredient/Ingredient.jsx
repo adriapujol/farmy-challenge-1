@@ -60,10 +60,11 @@ function Ingredient({ ingredient }) {
             <td>{currIngredient.costPerServing}€</td>
             <td>
                 <ServingControl>
-                    <div>Servings: </div>
                     <div>{numServings}</div>
-                    <ButtonIcon onClick={handleAddServing}><FontAwesomeIcon icon={faCaretUp} /></ButtonIcon>
-                    <ButtonIcon onClick={handleSubstractServing}><FontAwesomeIcon icon={faCaretDown} /></ButtonIcon>
+                    <FlexWrap column center>
+                        <ButtonIcon onClick={handleAddServing}><FontAwesomeIcon icon={faCaretUp} /></ButtonIcon>
+                        <ButtonIcon onClick={handleSubstractServing}><FontAwesomeIcon icon={faCaretDown} /></ButtonIcon>
+                    </FlexWrap>
                 </ServingControl>
             </td>
             <td>{currIngredient.weightPerServing}g</td>

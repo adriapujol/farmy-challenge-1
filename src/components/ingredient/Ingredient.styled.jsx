@@ -4,8 +4,6 @@ const IngredientStyled = styled.tr`
 
     text-align: center;
 
-
-
     & > :first-child {
         text-align:left;
         width: 200px;
