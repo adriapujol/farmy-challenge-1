@@ -55,19 +55,21 @@ function Ingredient({ ingredient }) {
     }
 
     return (
-        <IngredientStyled width={"100%"}>
-            <div>{currIngredient.name}</div>
-            <div>{currIngredient.costPerServing}€</div>
-            <ServingControl>
-                <div>Servings: </div>
-                <div>{numServings}</div>
-                <FlexWrap column width={"20px"}>
+        <IngredientStyled>
+            <td>{currIngredient.name}</td>
+            <td>{currIngredient.costPerServing}€</td>
+            <td>
+                <ServingControl>
+                    <div>Servings: </div>
+                    <div>{numServings}</div>
                     <ButtonIcon onClick={handleAddServing}><FontAwesomeIcon icon={faCaretUp} /></ButtonIcon>
                     <ButtonIcon onClick={handleSubstractServing}><FontAwesomeIcon icon={faCaretDown} /></ButtonIcon>
-                </FlexWrap>
-            </ServingControl>
-            <div>{currIngredient.weightPerServing}g</div>
-            <ButtonIcon onClick={deleteIngredient}><FontAwesomeIcon icon={faTrashCan} /></ButtonIcon>
+                </ServingControl>
+            </td>
+            <td>{currIngredient.weightPerServing}g</td>
+            <td>
+                <ButtonIcon onClick={deleteIngredient}><FontAwesomeIcon icon={faTrashCan} /></ButtonIcon>
+            </td>
         </IngredientStyled>
     )
 }

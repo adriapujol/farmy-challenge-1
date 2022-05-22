@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import GlobalStyle from './components/styles/globalStyles';
+import GlobalStyle from './components/styles/GlobalStyles';
 import DataService from "simple-localstorage-data-service-stub";
 import SaladMaker from './Pages/SaladMaker/SaladMaker';
 import Home from './Pages/Home/Home';

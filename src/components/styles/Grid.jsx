@@ -2,15 +2,16 @@ import styled from 'styled-components';
 
 const Grid = styled.div`
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 4fr;
     /* grid-template-areas: "sidebar content"; */
-    height: 100vh;
+    margin-top: 5vh;
+    height: 95vh;
     width: 100%;
 
-    .sidebar {
+    /* .sidebar {
         background-color: green;
         /* grid-area: "sidebar"; */
-        overflow-y: scroll;
+        
     }
 
     .content {
@@ -18,7 +19,7 @@ const Grid = styled.div`
         /* grid-area: "content"; */
         /* grid-column: "content";
         grid-row: "content"; */
-    }
+    } */
 
 `
 

@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { currentSalad, updateName, updateCost, updatePrice, updateHoursFresh } from '../../features/currentSalad/currentSalad';
 import { useNavigate } from 'react-router-dom';
 import Ingredient from '../../components/ingredient/Ingredient';
+import IngredientsTable from '../ingredientsTable/IngredientsTable';
 import ButtonStyled from '../styles/Button';
 import ButtonIcon from '../styles/ButtonIcon';
 import ShadowBox from '../styles/ShadowBox';
 import FlexWrap from '../styles/FlexWrap';
 import Size from '../size/Size';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { getCost, getPrice, isEmptyObj, combineById, getHoursFresh, getWeight } from '../../helpers/helpers';
 import { addSalad, updateSalad } from '../../features/salads/salads';
 import { v4 as uuid } from 'uuid';
@@ -140,39 +141,30 @@ function SaladEdit() {
 
     return (
 
-        <SaladEditStyle className="content">
-            <ShadowBox className='info'>
-                <FlexWrap between width={standardWidth}>
+        <SaladEditStyle>
+            <FlexWrap column around width={"100%"} maxWidth={"1000px"} height={"100px"}>
+                <FlexWrap between width={"100%"}>
                     <div className='edit-name'>
                         {editName ? <input type="text" placeholder="Salad name here" value={name} onChange={handleNameInput} /> : <label>{currSalad.name}</label>}
                         <ButtonIcon onClick={handleNameEdit}><FontAwesomeIcon icon={faPen} /></ButtonIcon>
                     </div>
                     <Size />
                 </FlexWrap>
-                <FlexWrap between>
-                    <div className='cost'>Target cost/weight: {targetCost}€/{targetWeight}g</div>
-                    <div className="price">Price: {price}</div>
+                <FlexWrap column width={"100%"}>
+                    <FlexWrap between>
+                        <div className='cost'>Target cost/weight: {targetCost}€/{targetWeight}g</div>
+                        <div className="price">Price: {price}</div>
+                    </FlexWrap>
+                    <FlexWrap between >
+                        <div>Actual cost/weight: {cost}€/{weight}g</div>
+                        <div>Hours fresh: {hoursFresh}</div>
+                    </FlexWrap>
                 </FlexWrap>
-                <FlexWrap between >
-                    <div>Actual cost/weight: {cost}€/{weight}g</div>
-                    <div>Hours fresh: {hoursFresh}</div>
-                </FlexWrap>
-
-            </ShadowBox>
-            <ShadowBox>
-                <FlexWrap center column width={standardWidth}>
-                    <h4>Ingredients</h4>
-                    {
-                        fullIngredients.map((ingredient, index) => {
-                            return <Ingredient
-                                key={ingredient.id}
-                                ingredient={ingredient}
-                            />
-                        })
-
-                    }
-                </FlexWrap>
-            </ShadowBox>
+            </FlexWrap>
+            <FlexWrap center column maxHeight={"700px"} width={"100%"} maxWidth={"1000px"}>
+                <h4>Ingredients</h4>
+                <IngredientsTable ingredients={fullIngredients} />
+            </FlexWrap>
             <div className="controls">
                 <ButtonStyled cancel onClick={handleCancel}>Cancel</ButtonStyled>
                 <ButtonStyled onClick={handleAddSalad}>Save</ButtonStyled>
