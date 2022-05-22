@@ -6,11 +6,7 @@ const SaladEditStyle = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 2rem;
-
-    .info {
-        border: 2px solid lightgray;
-        
-    }
+    width: 100%;
 
     .edit-name {
         /* display: flex; */

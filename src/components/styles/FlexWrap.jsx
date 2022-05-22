@@ -8,6 +8,9 @@ const FlexWrap = styled.div`
     width: ${props => props.width ? props.width : "auto"};
     height: ${props => props.height ? props.height : "auto"};
     max-height: ${props => props.maxHeight ? props.maxHeight : "auto"};
+    max-width: ${props => props.maxWidth ? props.maxWidth : "auto"};
+    min-height: ${props => props.minHeight ? props.minHeight : "auto"};
+    min-width: ${props => props.minWidth ? props.minWidth : "auto"};
     padding: ${props => props.padding ? props.padding : "auto"};
 `;
 

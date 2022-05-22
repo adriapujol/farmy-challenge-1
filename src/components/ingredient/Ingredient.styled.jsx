@@ -8,6 +8,7 @@ const IngredientStyled = styled.tr`
 
     & > :first-child {
         text-align:left;
+        width: 200px;
     }
 `;
 

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const IngredientsStyled = styled.table`
 
-
         width: 100%;
         overflow-y: scroll;
         border-collapse: collapse;
@@ -33,6 +32,24 @@ const IngredientsStyled = styled.table`
         tbody tr:nth-child(2n-1) {
         background-color: rgba(0, 0, 0, 0.1)
         }
+        /* th: {
+            width: 100px;
+        }
+        th:first-child {
+            width: 100px;
+        }
+        th:last-child {
+            width: 100px;
+        }
+        tbody tr: {
+            width: 100px;
+        }
+        tbody tr:first-child {
+            width: 100px;
+        }
+        tbody tr:last-child {
+            width: 100px;
+        } */
 
 `;
 
