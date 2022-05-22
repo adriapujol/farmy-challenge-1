@@ -5,7 +5,6 @@ import { addIngredients } from '../../features/currentSalad/currentSalad';
 import { removeProduct } from "../../features/productsSelect/productsSelect";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import ButtonIcon from '../styles/ButtonIcon';
 
 
 function Product({ product }) {
@@ -19,9 +18,9 @@ function Product({ product }) {
     }
 
     return (
-        <ProductStyled>
+        <ProductStyled onClick={handleAddIngredient}>
             <label>{product.name}</label>
-            <ButtonIcon onClick={handleAddIngredient}><FontAwesomeIcon icon={faCirclePlus} /></ButtonIcon>
+            <FontAwesomeIcon icon={faCirclePlus} />
         </ProductStyled>
     )
 }

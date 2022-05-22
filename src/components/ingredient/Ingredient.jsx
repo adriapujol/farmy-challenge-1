@@ -4,12 +4,11 @@ import ButtonIcon from '../styles/ButtonIcon';
 import IngredientStyled from './Ingredient.styled';
 import ServingControl from '../styles/ServingControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan, faCirclePlus, faCircleMinus, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import FlexWrap from '../styles/FlexWrap';
-import { currentSalad, updateServing, deleteIngredients, updateCost, updatePrice } from '../../features/currentSalad/currentSalad';
-import { productList } from '../../features/products/products';
-import { productsOptions, removeProduct, addProduct } from "../../features/productsSelect/productsSelect";
-import { getCost, getPrice, combineById } from '../../helpers/helpers';
+import { updateServing, deleteIngredients, updateCost } from '../../features/currentSalad/currentSalad';
+import { addProduct } from "../../features/productsSelect/productsSelect";
+import { getCost, combineById } from '../../helpers/helpers';
 
 function Ingredient({ ingredient }) {
 
@@ -60,10 +59,11 @@ function Ingredient({ ingredient }) {
             <td>{currIngredient.costPerServing}€</td>
             <td>
                 <ServingControl>
-                    <div>Servings: </div>
                     <div>{numServings}</div>
-                    <ButtonIcon onClick={handleAddServing}><FontAwesomeIcon icon={faCaretUp} /></ButtonIcon>
-                    <ButtonIcon onClick={handleSubstractServing}><FontAwesomeIcon icon={faCaretDown} /></ButtonIcon>
+                    <FlexWrap column center>
+                        <ButtonIcon onClick={handleAddServing}><FontAwesomeIcon icon={faCaretUp} /></ButtonIcon>
+                        <ButtonIcon onClick={handleSubstractServing}><FontAwesomeIcon icon={faCaretDown} /></ButtonIcon>
+                    </FlexWrap>
                 </ServingControl>
             </td>
             <td>{currIngredient.weightPerServing}g</td>

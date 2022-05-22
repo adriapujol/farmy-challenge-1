@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { lightgrey } from '../../colors';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -10,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
 
 body {
     font-family: 'Lato', sans-serif;
-    background-color: #fcfcfc;
+    background-color: ${lightgrey};
 }
 
 ::-webkit-scrollbar {
@@ -19,22 +20,22 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background-color:rgba(157,177,124, 0.2);
+    background-color:rgba(0,0,0, 0.1);
     border-radius: 100vh;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color:rgba(157,177,124, 0.6);
+    background-color:rgba(0,0,0, 0.2);
     border-radius: 100vh;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color:rgba(157,177,124, 1);
+    background-color:rgba(0,0,0, 0.4);
 }
 
 @supports (scrollbar-color: red blue) {
     * {
-        scrollbar-color: rgba(157,177,124, 0.6) rgba(157,177,124, 0.2);
+        scrollbar-color: rgba(0,0,0, 0.6) rgba(0,0,0, 0.2);
         scrollbar-width: thin;
     }
 }

@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { yellow, lightgrey } from '../../colors';
 
 const IngredientsStyled = styled.table`
 
         width: 100%;
         overflow-y: scroll;
         border-collapse: collapse;
+        
 
         td, tr, th {
             padding: 1rem;
@@ -14,7 +16,7 @@ const IngredientsStyled = styled.table`
         thead {
             position: sticky;
             top: 0;
-            background-color: #F4E285;
+            background-color: ${yellow};
             z-index: 3;
         }
 
@@ -30,27 +32,8 @@ const IngredientsStyled = styled.table`
         }
 
         tbody tr:nth-child(2n-1) {
-        background-color: rgba(0, 0, 0, 0.1)
+        background-color: ${lightgrey};
         }
-        /* th: {
-            width: 100px;
-        }
-        th:first-child {
-            width: 100px;
-        }
-        th:last-child {
-            width: 100px;
-        }
-        tbody tr: {
-            width: 100px;
-        }
-        tbody tr:first-child {
-            width: 100px;
-        }
-        tbody tr:last-child {
-            width: 100px;
-        } */
-
 `;
 
 export default IngredientsStyled;

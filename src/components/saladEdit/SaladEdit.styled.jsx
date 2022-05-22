@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { white } from '../../colors';
 
 
 const SaladEditStyle = styled.div`
@@ -7,10 +8,9 @@ const SaladEditStyle = styled.div`
     align-items: center;
     padding: 2rem;
     width: 100%;
-
+    background-color: ${white};
+    
     .edit-name {
-        /* display: flex; */
-        /* align-items: center; */
         label, input {
             font-size: 2rem;
             margin-right: 0.5rem;

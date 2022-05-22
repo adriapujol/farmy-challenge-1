@@ -18,8 +18,7 @@ const saladsSlice = createSlice({
             const newSalads = saladList.map(salad => {
                 if (salad.id === action.payload.id) return action.payload;
                 return salad;
-            })
-            console.log("REDUCER NEW SALAD", newSalads)
+            });
             state.value = [...newSalads];
         }
     }

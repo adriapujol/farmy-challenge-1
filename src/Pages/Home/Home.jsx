@@ -4,7 +4,6 @@ import Card from '../../components/card/Card';
 import { useSelector } from 'react-redux';
 
 
-
 function Home() {
 
     const salads = useSelector((state) => state.salads.value);
