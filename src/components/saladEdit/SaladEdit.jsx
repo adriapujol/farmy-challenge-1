@@ -9,8 +9,8 @@ import ButtonIcon from '../styles/ButtonIcon';
 import ShadowBox from '../styles/ShadowBox';
 import FlexWrap from '../styles/FlexWrap';
 import Size from '../size/Size';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { getCost, getPrice, isEmptyObj, combineById, getHoursFresh, getWeight } from '../../helpers/helpers';
 import { addSalad, updateSalad } from '../../features/salads/salads';
 import { v4 as uuid } from 'uuid';

@@ -3,6 +3,9 @@ import ProductStyled from './Product.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { addIngredients } from '../../features/currentSalad/currentSalad';
 import { removeProduct } from "../../features/productsSelect/productsSelect";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import ButtonIcon from '../styles/ButtonIcon';
 
 function Product({ product }) {
     const dispatch = useDispatch();
@@ -17,7 +20,7 @@ function Product({ product }) {
     return (
         <ProductStyled>
             <label>{product.name}</label>
-            <button onClick={handleAddIngredient}> + </button>
+            <ButtonIcon onClick={handleAddIngredient}><FontAwesomeIcon icon={faCirclePlus} /></ButtonIcon>
         </ProductStyled>
     )
 }
