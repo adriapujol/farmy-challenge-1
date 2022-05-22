@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import ButtonIcon from '../styles/ButtonIcon';
 
+
 function Product({ product }) {
     const dispatch = useDispatch();
     const currSalad = useSelector((state) => state.currentSalad.value);

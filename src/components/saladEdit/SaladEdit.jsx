@@ -160,7 +160,7 @@ function SaladEdit() {
 
             </ShadowBox>
             <ShadowBox>
-                <FlexWrap center column width={standardWidth}>
+                <FlexWrap center column width={standardWidth} maxHeight={"700px"}>
                     <h4>Ingredients</h4>
                     {
                         fullIngredients.map((ingredient, index) => {

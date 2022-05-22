@@ -5,7 +5,6 @@ import { removeProduct } from "../../features/productsSelect/productsSelect";
 import FlexWrap from '../styles/FlexWrap';
 import ProductsStyled from './Products.styled';
 
-
 function ProductsList() {
 
     const dispatch = useDispatch();
@@ -34,7 +33,6 @@ function ProductsList() {
                 <input type="text" onChange={handleSearch} />
             </div>
             <div className="products-list">
-
                 {
                     filtered.map((product, index) => {
                         return <Product
@@ -43,6 +41,7 @@ function ProductsList() {
                         />
                     })
                 }
+
             </div>
         </ProductsStyled>
     )

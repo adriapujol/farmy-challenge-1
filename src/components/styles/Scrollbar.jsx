@@ -1,18 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import styled from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Lato', sans-serif;
-    background-color: #fcfcfc;
-}
-
+const Scrollbar = styled.div`
 ::-webkit-scrollbar {
     width: 0.6rem;
 }
@@ -38,6 +26,7 @@ body {
     }
 }
 
+
 `;
 
-export default GlobalStyle;
+export default Scrollbar;

@@ -7,7 +7,9 @@ const FlexWrap = styled.div`
     align-items: ${props => props.center ? "center" : ""};
     width: ${props => props.width ? props.width : "auto"};
     height: ${props => props.height ? props.height : "auto"};
-    padding: ${props => props.padding ? props.padding : "auto"};;
+    max-height: ${props => props.maxHeight ? props.maxHeight : "auto"};
+    padding: ${props => props.padding ? props.padding : "auto"};
+    overflow-y: ${props => props.scrollY ? "scroll" : "auto"};;
 `;
 
 export default FlexWrap;
