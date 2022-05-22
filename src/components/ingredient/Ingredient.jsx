@@ -23,6 +23,7 @@ function Ingredient({ ingredient }) {
     useEffect(() => {
         const currProd = products.find(prod => prod.id === id);
         setCurrentIngredient(currProd);
+        setNumServings(ingredient.numOfServings);
     }, []);
 
     useEffect(() => {
