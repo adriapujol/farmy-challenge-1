@@ -3,24 +3,23 @@ import SaladEditStyle from './SaladEdit.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { currentSalad, updateName, updateCost, updatePrice, updateHoursFresh } from '../../features/currentSalad/currentSalad';
 import { useNavigate } from 'react-router-dom';
-import Ingredient from '../../components/ingredient/Ingredient';
 import IngredientsTable from '../ingredientsTable/IngredientsTable';
 import ButtonStyled from '../styles/Button';
 import ButtonIcon from '../styles/ButtonIcon';
-import ShadowBox from '../styles/ShadowBox';
 import FlexWrap from '../styles/FlexWrap';
 import Size from '../size/Size';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { getCost, getPrice, isEmptyObj, combineById, getHoursFresh, getWeight } from '../../helpers/helpers';
 import { addSalad, updateSalad } from '../../features/salads/salads';
 import { v4 as uuid } from 'uuid';
+import DataService from 'simple-localstorage-data-service-stub';
+
+// const dataService = DataService();
 
 function SaladEdit() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const standardWidth = "600px";
 
     const [name, setName] = useState("Salad Name");
     const [fullIngredients, setFullIngredients] = useState([]);
@@ -42,7 +41,7 @@ function SaladEdit() {
 
 
     useEffect(() => {
-        setName("Salad Name");
+        setName(currSalad.name);
         setCost(currSalad.cost);
         setPrice(currSalad.price);
     }, []);
@@ -60,7 +59,6 @@ function SaladEdit() {
     }, [currSalad.size, saladTypes]);
 
     useEffect(() => {
-        console.log("COMBINED", combineById(currSalad.ingredients, products))
         setFullIngredients(combineById(currSalad.ingredients, products))
     }, [currSalad.ingredients])
 
@@ -68,8 +66,6 @@ function SaladEdit() {
         dispatch(updateCost({ cost: getCost(fullIngredients) }));
         setHoursFresh(getHoursFresh(fullIngredients));
         setWeight(getWeight(fullIngredients));
-        console.log("FULL INGREDIENTS", fullIngredients)
-        console.log("GETTING HOURS", getHoursFresh(fullIngredients));
     }, [fullIngredients]);
 
     useEffect(() => {
@@ -82,7 +78,6 @@ function SaladEdit() {
     }, [currSalad.price])
 
     useEffect(() => {
-        console.log("hours fresh useEFFECT:", hoursFresh)
         dispatch(updateHoursFresh(hoursFresh));
     }, [hoursFresh])
 
@@ -92,6 +87,10 @@ function SaladEdit() {
 
     const handleNameEdit = () => {
         if (editName) dispatch(updateName({ name: name }));
+        setEditName(prevEdit => !prevEdit)
+    }
+
+    const handleCancelEditName = () => {
         setEditName(prevEdit => !prevEdit)
     }
 
@@ -112,19 +111,18 @@ function SaladEdit() {
 
     const handleAddSalad = () => {
 
-        console.log(salads);
         const saladExist = salads.find(salad => salad.id === currSalad.id);
-        console.log("SALAD EXIST: ", saladExist);
 
         if (currSalad.ingredients.length === 0) return alert("Remember to add ingredients");
         if (!isEmptyObj(saladExist)) {
-            console.log("UPDATE")
             dispatch(updateSalad(currSalad))
         } else {
-            console.log("NEWWWW")
             dispatch(addSalad(currSalad));
+            // dataService.create('salads', currSalad).then(salad => {
+            //     alert(`${salad.name} added successfully`)
+            //     dispatch(addSalad(salad));
+            // });
         }
-        console.log("This fired")
         dispatch(currentSalad({
             id: uuid(),
             name: "Salad name",
@@ -144,10 +142,16 @@ function SaladEdit() {
         <SaladEditStyle>
             <FlexWrap column around width={"100%"} maxWidth={"1000px"} height={"100px"}>
                 <FlexWrap between width={"100%"}>
-                    <div className='edit-name'>
+                    <FlexWrap className='edit-name'>
                         {editName ? <input type="text" placeholder="Salad name here" value={name} onChange={handleNameInput} /> : <label>{currSalad.name}</label>}
-                        <ButtonIcon onClick={handleNameEdit}><FontAwesomeIcon icon={faPen} /></ButtonIcon>
-                    </div>
+                        <FlexWrap column center>
+                            <ButtonIcon onClick={handleNameEdit}>
+                                {!editName && <FontAwesomeIcon icon={faPen} />}
+                                {editName && <FontAwesomeIcon icon={faCheck} />}
+                            </ButtonIcon>
+                            {editName && <ButtonIcon onClick={handleCancelEditName}><FontAwesomeIcon icon={faXmark} /></ButtonIcon>}
+                        </FlexWrap>
+                    </FlexWrap>
                     <Size />
                 </FlexWrap>
                 <FlexWrap column width={"100%"}>

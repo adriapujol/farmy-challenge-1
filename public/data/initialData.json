@@ -366,6 +366,22 @@
       "currentStock": 0,
       "price": 0.33,
       "hoursFresh": 24
+    },
+    {
+      "name": "Example Salad 2",
+      "id": "fefc37af-7240-4092-92fe-68f01bb11aba",
+      "size": "large",
+      "ingredients": [
+        {
+          "id": 1,
+          "numOfServings": 1
+        }
+      ],
+      "cost": 0.3,
+      "targetStock": 20,
+      "currentStock": 0,
+      "price": 0.33,
+      "hoursFresh": 24
     }
   ],
   "subscriptions": [

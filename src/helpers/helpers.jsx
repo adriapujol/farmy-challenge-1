@@ -27,7 +27,7 @@ export const getHoursFresh = fullIngredientsList => {
     const hours = fullIngredientsList.map(ingredient => {
         return ingredient.hoursFresh
     });
-    let hoursFresh = Math.max(...hours);
+    let hoursFresh = Math.min(...hours);
     hoursFresh = hoursFresh < 0 ? 0 : hoursFresh;
     return hoursFresh;
 };
