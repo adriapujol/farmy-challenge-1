@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { yellow, green, lightgrey, darkgreen, darkgrey, white, black, lightgreen } from '../../colors';
+import { lightgreen } from '../../colors';
 
 const ProductsStyled = styled.div`
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { orange, grey, yellow, green, lightgrey, darkgreen, darkgrey, white, black } from '../../colors';
+import { yellow, lightgrey } from '../../colors';
 
 const IngredientsStyled = styled.table`
 

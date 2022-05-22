@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { orange, grey, yellow, green, lightgrey, darkgreen, darkgrey, white, black } from '../../colors';
+import { orange, grey, lightgrey, white } from '../../colors';
 
 const ButtonActive = styled.button`
     cursor: pointer;

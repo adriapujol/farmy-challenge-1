@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { yellow, green, lightgrey, darkgreen, darkgrey, white, black } from '../../colors';
+import { lightgrey } from '../../colors';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -11,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
 
 body {
     font-family: 'Lato', sans-serif;
-    background-color: #fcfcfc;
     background-color: ${lightgrey};
 }
 

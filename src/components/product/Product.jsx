@@ -5,7 +5,6 @@ import { addIngredients } from '../../features/currentSalad/currentSalad';
 import { removeProduct } from "../../features/productsSelect/productsSelect";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import ButtonIcon from '../styles/ButtonIcon';
 
 
 function Product({ product }) {

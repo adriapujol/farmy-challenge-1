@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import GlobalStyle from './components/styles/GlobalStyles';
 import DataService from "simple-localstorage-data-service-stub";
 import SaladMaker from './Pages/SaladMaker/SaladMaker';

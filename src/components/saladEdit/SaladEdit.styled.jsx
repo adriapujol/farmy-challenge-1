@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { yellow, green, lightgrey, darkgreen, darkgrey, white, black } from '../../colors';
+import { white } from '../../colors';
 
 
 const SaladEditStyle = styled.div`

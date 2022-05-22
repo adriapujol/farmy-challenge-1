@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { yellow, green, lightgrey, darkgreen, darkgrey, white, black } from '../../colors';
+import { yellow, darkgreen, white } from '../../colors';
 
 
 const NavbarStyled = styled.nav`
@@ -29,9 +29,6 @@ const NavbarStyled = styled.nav`
         font-size: 1.5rem;
         align-self: center;
     }
-
-
-
 
 `;
 

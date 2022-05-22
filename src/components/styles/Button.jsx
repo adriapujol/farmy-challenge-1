@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { yellow, green, lightgrey, darkgreen, darkgrey, darkorange, white, black, orange, grey, lightgreen } from '../../colors';
+import { lightgrey, darkorange, white, orange, grey } from '../../colors';
 
 const ButtonStyled = styled.button`
 

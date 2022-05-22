@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { orange } from '../../colors';
 
 const ButtonIcon = styled.button`
 
@@ -8,7 +9,7 @@ const ButtonIcon = styled.button`
         font-size: 1rem;
         
         &:hover {
-            color: orange;
+            color: ${orange};
         }
 `;
 

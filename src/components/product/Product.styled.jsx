@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { yellow, green, lightgrey, darkgreen, darkgrey, white, black } from '../../colors';
+import { darkgreen, white, black } from '../../colors';
 
 
 const ProductStyled = styled.button`
@@ -24,7 +24,7 @@ const ProductStyled = styled.button`
     }
 
     &:hover{
-        color: white;
+        color: ${white};
         background-color: ${darkgreen};
 
         .fa-circle-plus {
